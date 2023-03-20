@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div class="card-header ">
+    <ul class="nav nav-tabs card-header-tabs justify-content-center">
+        <li class="">
+            <button class="btn">Loai Linh Kien</button>
+        </li>
+        <li class="">
+            <button class="btn ">Thong So Lonh Kien</button>
+        </li>
+        <li class="nav-item">
+            <button class="btn">Danh Muc San Pham</button>
+        </li>
+        <li class="nav-item">
+            <button class="btn">Hang San Pham</button>
+        </li>
+        <li class="nav-item">
+            <button class="btn">Cau Hinh San Pham </button>
+        </li>
+    </ul>
+</div>
+<div>
+    @RenderBody()
+</div>
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+}
+

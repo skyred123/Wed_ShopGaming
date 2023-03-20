@@ -1,0 +1,64 @@
+﻿@model Wed_ShopGaming.ViewModels.LoaiSPViewModel
+@{
+    ViewBag.Title = "Index_LoaiSP";
+    Layout = "~/Views/Shared/_LayoutQLSanPham.cshtml";
+}
+
+@using (Html.BeginForm("Index_LoaiSP", "QLSanPham", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row p-2">
+        <div class="col-lg-7">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.Label("So Luong")
+                    </th>
+                </tr>
+                @if (Model != null && Model.Loais.Count() != 0)
+                {
+                    foreach (var item in Model.Loais)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                               <a href="">+</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <div class="form-horizontal col-lg-5">
+            <table class="table">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Create" class="btn btn-default text-black" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+
