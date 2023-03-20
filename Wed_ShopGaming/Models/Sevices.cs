@@ -43,5 +43,9 @@ namespace Wed_ShopGaming.Models
         {
             return _dbContext.LoaiSPs.ToList();
         }
+        public List<LoaiSP> CreateLoaiSP()
+        {
+            return _dbContext.LoaiSPs.ToList();
+        }
     }
 }
