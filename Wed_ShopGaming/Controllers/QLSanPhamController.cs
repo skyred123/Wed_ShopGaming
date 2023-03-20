@@ -21,20 +21,5 @@ namespace Wed_ShopGaming.Controllers
             };
             return View(model);
         }
-
-
-        [HttpPost]
-        public ActionResult Index_LoaiSP(LoaiSPViewModel entity)
-        {
-            if (entity.Name != null)
-            {
-                LoaiSP loaiSP = new LoaiSP();
-                loaiSP.Id = Guid.NewGuid();
-                loaiSP.Name = entity.Name;
-                Sevices._dbContext.LoaiSPs.Add(loaiSP);
-                Sevices._dbContext.SaveChanges();
-            }
-            return RedirectToAction("Index_LoaiSP", "QLSanPham");
-        }
     }
 }
