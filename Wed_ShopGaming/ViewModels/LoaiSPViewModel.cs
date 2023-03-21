@@ -10,6 +10,10 @@ namespace Wed_ShopGaming.ViewModels
 {
     public class LoaiSPViewModel
     {
+        [DisplayName("Ma Loai")]
+        [Required]
+        public string Id { get; set; }
+
         [DisplayName("Ten Loai")]
         [Required]
         public string Name { get; set; }

@@ -1,10 +1,11 @@
-﻿@model Wed_ShopGaming.ViewModels.LoaiSPViewModel
+﻿@using Wed_ShopGaming.Models.Entity
+@model Wed_ShopGaming.ViewModels.LoaiSPViewModel
 @{
     ViewBag.Title = "Index_LoaiSP";
-    Layout = "~/Views/Shared/_LayoutQLSanPham.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutQLSanPham.cshtml";
 }
 
-@using (Html.BeginForm("Index_LoaiSP", "QLSanPham", FormMethod.Post))
+@using (Html.BeginForm("Create_LoaiSP", "QLSanPham", new {area ="Admin"}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row p-2">
@@ -30,7 +31,10 @@
                                 0
                             </td>
                             <td>
-                               <a href="">+</a>
+                                <a href="">+</a>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete_LoaiSP", new { id = item.Id })
                             </td>
                         </tr>
                     }
@@ -50,7 +54,6 @@
                         @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </td>
-
                 </tr>
                 <tr>
                     <td>
@@ -61,4 +64,5 @@
         </div>
     </div>
 }
+
 

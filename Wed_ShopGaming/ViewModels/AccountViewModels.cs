@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Wed_ShopGaming.Models;
 
-namespace Wed_ShopGaming.Models
+namespace Wed_ShopGaming.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
@@ -108,5 +109,11 @@ namespace Wed_ShopGaming.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class ListUserViewModel
+    {
+        public ApplicationUser User { get; set; }
+        public string NameRole { get; set; }
     }
 }

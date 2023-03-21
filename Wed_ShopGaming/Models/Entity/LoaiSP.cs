@@ -12,5 +12,6 @@ namespace Wed_ShopGaming.Models.Entity
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+            
     }
 }
