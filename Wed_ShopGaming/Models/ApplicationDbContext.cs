@@ -26,7 +26,5 @@ namespace Wed_ShopGaming.Models
         public DbSet<LinhKien> LinhKiens { get;set; }
         public DbSet<LoaiSP> LoaiSPs { get;set; }
         public DbSet<ThongSo> ThongSos { get;set; }
-
-        
     }
 }

@@ -2,10 +2,10 @@
 @model Wed_ShopGaming.ViewModels.LoaiSPViewModel
 @{
     ViewBag.Title = "Index_LoaiSP";
-    Layout = "~/Views/Shared/_LayoutQLSanPham.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutQLSanPham.cshtml";
 }
 
-@using (Html.BeginForm("Create_LoaiSP", "QLSanPham", FormMethod.Post))
+@using (Html.BeginForm("Create_LoaiSP", "QLSanPham", new {area ="Admin"}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row p-2">

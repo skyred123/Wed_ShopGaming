@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,8 +8,9 @@ using Wed_ShopGaming.Models;
 using Wed_ShopGaming.Models.Entity;
 using Wed_ShopGaming.ViewModels;
 
-namespace Wed_ShopGaming.Controllers
+namespace Wed_ShopGaming.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class QLSanPhamController : Controller
     {
         ApplicationDbContext context;
@@ -36,7 +38,7 @@ namespace Wed_ShopGaming.Controllers
                 context.LoaiSPs.Add(loaiSP);
                 context.SaveChanges();
             }
-            return RedirectToAction("Index_LoaiSP", "QLSanPham");
+            return RedirectToAction("Index_LoaiSP", "QLSanPham",new { area = "Admin" });
         }
         public ActionResult Delete_LoaiSP(String id)
         {
@@ -48,7 +50,7 @@ namespace Wed_ShopGaming.Controllers
                 {
                     context.LoaiSPs.Remove(loaiSP);
                     context.SaveChanges();
-                    return RedirectToAction("Index_LoaiSP", "QLSanPham");
+                    return RedirectToAction("Index_LoaiSP", "QLSanPham", new { area = "Admin" });
                 }
             }
             return RedirectToAction("Index", "Home");

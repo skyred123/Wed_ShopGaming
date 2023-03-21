@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Wed_ShopGaming.Models;
+using Wed_ShopGaming.ViewModels;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -112,7 +113,17 @@ namespace Wed_ShopGaming.Controllers
                 var authenManager = HttpContext.GetOwinContext().Authentication;
                 var userIdentity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenManager.SignIn(new AuthenticationProperties(), userIdentity);
-                return RedirectToAction("Index", "Home");
+                if(userManager.IsInRole(user.Id,"Admin")) {
+                    return RedirectToAction("Index", "Home",new {area = "Admin"});
+                }
+                else if (userManager.IsInRole(user.Id, "Customer"))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Customer" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Customer" });
+                }
             }
             else
             {

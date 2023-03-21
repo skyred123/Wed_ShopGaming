@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNet.Identity
 <html>
 <head>
     <meta charset="utf-8" />
@@ -41,7 +42,7 @@
             </div>
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
-                    <a href="~/Home/Index" class="text-decoration-none">
+                    <a href="~/Areas/Admin/Views/Home/Index" class="text-decoration-none">
                         <span class="h3 text-uppercase text-primary bg-dark px-2">Multi</span>
                         <span class="h3 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
                     </a>
@@ -75,8 +76,8 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="~/Shop/Shop" class="nav-item nav-link">Shop</a>
-                                <a href="~/Shop/ShopDetail" class="nav-item nav-link">Shop Detail</a>
+                                @Html.ActionLink("Danh Sach Nguoi Dung", "Index", "Account", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                @Html.ActionLink("Quan Ly San Pham", "Index_LoaiSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                                 <a href="" class="btn px-0">
@@ -91,8 +92,8 @@
                             <div class="btn-group ml-3">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" type="button">Sign in</button>
-                                    <button class="dropdown-item" type="button">Sign up</button>
+                                    @Html.Label("Hello " + User.Identity.GetUserName() + "!")
+                                    @Html.ActionLink("Log Out", "Logout", "Account")
                                 </div>
                             </div>
                         </div>
