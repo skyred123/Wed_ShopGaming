@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -11,6 +12,11 @@ namespace Wed_ShopGaming
 {
     public partial class Startup
     {
+        public ApplicationDbContext _dbContext;
+        public Startup()
+        {
+            _dbContext = ApplicationDbContext.Create();
+        }
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -63,6 +69,54 @@ namespace Wed_ShopGaming
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            CreateRolesUser();
+        }
+        public void CreateRolesUser()
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_dbContext));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_dbContext));
+            if (!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
+            }
+            if (userManager.FindByName("admin@gmail.com") == null)
+            {
+                var user = new ApplicationUser();
+                user.UserName = "admin@gmail.com";
+                user.Email = "admin@gmail.com";
+                string userPwd = "admin1";
+                var checkUser = userManager.Create(user, userPwd);
+                if (checkUser.Succeeded)
+                {
+                    userManager.AddToRole(user.Id, "admin");
+                }
+            }
+            if (!roleManager.RoleExists("Manager"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Manager";
+                roleManager.Create(role);
+            }
+            if (userManager.FindByName("manager@gmail.com") == null)
+            {
+                var user = new ApplicationUser();
+                user.UserName = "manager@gmail.com";
+                user.Email = "manager@gmail.com";
+                string userPwd = "manager";
+                var checkUser = userManager.Create(user, userPwd);
+                if (checkUser.Succeeded)
+                {
+                    userManager.AddToRole(user.Id, "manager");
+                }
+            }
+            if (!roleManager.RoleExists("Customer"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Customer";
+                roleManager.Create(role);
+            }
         }
     }
 }

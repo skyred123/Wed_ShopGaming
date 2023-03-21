@@ -11,30 +11,47 @@ namespace Wed_ShopGaming.Controllers
 {
     public class QLSanPhamController : Controller
     {
+        ApplicationDbContext context;
+        public QLSanPhamController(){
+            context = ApplicationDbContext.Create();
+        }
         // GET: QLSanPham
         public ActionResult Index_LoaiSP()
         {
-            List<LoaiSP> list = Sevices.LoaiSPSevice().GetListLoaiSP();
+            List<LoaiSP> list = context.LoaiSPs.ToList();
             LoaiSPViewModel model = new LoaiSPViewModel()
             {
                 Loais = list,
             };
             return View(model);
         }
-
-
         [HttpPost]
-        public ActionResult Index_LoaiSP(LoaiSPViewModel entity)
+        public ActionResult Create_LoaiSP(LoaiSPViewModel entity)
         {
             if (entity.Name != null)
             {
                 LoaiSP loaiSP = new LoaiSP();
                 loaiSP.Id = Guid.NewGuid();
                 loaiSP.Name = entity.Name;
-                Sevices._dbContext.LoaiSPs.Add(loaiSP);
-                Sevices._dbContext.SaveChanges();
+                context.LoaiSPs.Add(loaiSP);
+                context.SaveChanges();
             }
             return RedirectToAction("Index_LoaiSP", "QLSanPham");
+        }
+        public ActionResult Delete_LoaiSP(String id)
+        {
+            if (id != null)
+            {
+                var item = Guid.Parse(id);
+                LoaiSP loaiSP = (context.LoaiSPs.ToList()).FirstOrDefault(e => e.Id == item);
+                if (loaiSP != null)
+                {
+                    context.LoaiSPs.Remove(loaiSP);
+                    context.SaveChanges();
+                    return RedirectToAction("Index_LoaiSP", "QLSanPham");
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
