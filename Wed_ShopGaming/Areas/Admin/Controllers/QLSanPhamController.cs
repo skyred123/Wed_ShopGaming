@@ -114,6 +114,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             ThongSoSPViewModel model = new ThongSoSPViewModel();
             return View(model);
             asdsadasdasdsadasd
+            test khoa
         }*/
         #endregion
     }
