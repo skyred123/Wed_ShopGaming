@@ -1,0 +1,76 @@
+﻿@model Wed_ShopGaming.ViewModels.ThongSoSPViewModel
+
+@{
+    ViewBag.Title = "ThongSoSP";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutQLSanPham.cshtml";
+}
+
+@using (Html.BeginForm("Create_ThongSoSP", "QLSanPham", new { area = "Admin" }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row p-2">
+        <div class="col-lg-7">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdLoai)
+                    </th>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.listThongSos)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoaiSP.Name)
+                            </td>
+                            <td>
+                                <a href="">+</a>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete_ThongSoSP", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <div class="form-horizontal col-lg-5">
+            <table class="table">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.IdLoai, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => model.IdLoai, new SelectList(Model.listloaiSPs, "Id", "Name"), htmlAttributes: new { @class = "control-label col-md-2 h5" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Create" class="btn btn-default text-black" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}

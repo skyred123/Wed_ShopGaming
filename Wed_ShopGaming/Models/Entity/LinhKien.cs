@@ -11,12 +11,9 @@ namespace Wed_ShopGaming.Models.Entity
     {
         [Key]
         public Guid Id { get; set; }
-
-        
         public Guid IdThongSo { get; set; }
-        public Guid IdSanPham { get; set; }
 
-        [ForeignKey(nameof(IdSanPham))]
+        [ForeignKey(nameof(Id))]
         public SanPham SanPham { get; set; }
         
 

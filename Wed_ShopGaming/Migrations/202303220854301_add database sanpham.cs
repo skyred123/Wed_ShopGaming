@@ -3,12 +3,12 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class adddblinhkien : DbMigration
+    public partial class adddatabasesanpham : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.DMSPs",
+                "dbo.Hangs",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
@@ -21,29 +21,13 @@
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        IdLoaiSP = c.Guid(nullable: false),
                         IdThongSo = c.Guid(nullable: false),
-                        IdDMSP = c.Guid(nullable: false),
-                        IdSanPham = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DMSPs", t => t.IdDMSP, cascadeDelete: true)
-                .ForeignKey("dbo.LoaiSPs", t => t.IdLoaiSP, cascadeDelete: true)
-                .ForeignKey("dbo.SanPhams", t => t.IdSanPham, cascadeDelete: true)
+                .ForeignKey("dbo.SanPhams", t => t.Id)
                 .ForeignKey("dbo.ThongSoes", t => t.IdThongSo, cascadeDelete: true)
-                .Index(t => t.IdLoaiSP)
-                .Index(t => t.IdThongSo)
-                .Index(t => t.IdDMSP)
-                .Index(t => t.IdSanPham);
-            
-            CreateTable(
-                "dbo.LoaiSPs",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
+                .Index(t => t.Id)
+                .Index(t => t.IdThongSo);
             
             CreateTable(
                 "dbo.SanPhams",
@@ -60,16 +44,19 @@
                 .Index(t => t.IdHang);
             
             CreateTable(
-                "dbo.Hangs",
+                "dbo.ThongSoes",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
                         Name = c.String(),
+                        IdLoaiSP = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.LoaiSPs", t => t.IdLoaiSP, cascadeDelete: true)
+                .Index(t => t.IdLoaiSP);
             
             CreateTable(
-                "dbo.ThongSoes",
+                "dbo.LoaiSPs",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
@@ -154,32 +141,29 @@
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.LinhKiens", "IdThongSo", "dbo.ThongSoes");
-            DropForeignKey("dbo.LinhKiens", "IdSanPham", "dbo.SanPhams");
+            DropForeignKey("dbo.ThongSoes", "IdLoaiSP", "dbo.LoaiSPs");
+            DropForeignKey("dbo.LinhKiens", "Id", "dbo.SanPhams");
             DropForeignKey("dbo.SanPhams", "IdHang", "dbo.Hangs");
-            DropForeignKey("dbo.LinhKiens", "IdLoaiSP", "dbo.LoaiSPs");
-            DropForeignKey("dbo.LinhKiens", "IdDMSP", "dbo.DMSPs");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.ThongSoes", new[] { "IdLoaiSP" });
             DropIndex("dbo.SanPhams", new[] { "IdHang" });
-            DropIndex("dbo.LinhKiens", new[] { "IdSanPham" });
-            DropIndex("dbo.LinhKiens", new[] { "IdDMSP" });
             DropIndex("dbo.LinhKiens", new[] { "IdThongSo" });
-            DropIndex("dbo.LinhKiens", new[] { "IdLoaiSP" });
+            DropIndex("dbo.LinhKiens", new[] { "Id" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.ThongSoes");
-            DropTable("dbo.Hangs");
-            DropTable("dbo.SanPhams");
             DropTable("dbo.LoaiSPs");
+            DropTable("dbo.ThongSoes");
+            DropTable("dbo.SanPhams");
             DropTable("dbo.LinhKiens");
-            DropTable("dbo.DMSPs");
+            DropTable("dbo.Hangs");
         }
     }
 }
