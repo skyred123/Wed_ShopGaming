@@ -1,10 +1,11 @@
-﻿@model Wed_ShopGaming.ViewModels.LoaiSPViewModel
+﻿@using Wed_ShopGaming.Models.Entity
+@model Wed_ShopGaming.ViewModels.LoaiSPViewModel
 @{
-    ViewBag.Title = "Index_LoaiSP";
-    Layout = "~/Views/Shared/_LayoutQLSanPham.cshtml";
+    ViewBag.Title = "Loai San Pham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutQLSanPham.cshtml";
 }
 
-@using (Html.BeginForm("Index_LoaiSP", "QLSanPham", FormMethod.Post))
+@using (Html.BeginForm("Create_LoaiSP", "QLSanPham", new {area ="Admin"}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row p-2">
@@ -22,15 +23,19 @@
                 {
                     foreach (var item in Model.Loais)
                     {
+                        string sl = item.ThongSos.Count().ToString();
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                0
+                                @Html.Label(sl)
                             </td>
                             <td>
-                               <a href="">+</a>
+                                @Html.ActionLink("Chi tiet", "ThongSoSP", new { id = item.Id })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xoa", "Delete_LoaiSP", new { id = item.Id })
                             </td>
                         </tr>
                     }
@@ -50,7 +55,6 @@
                         @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </td>
-
                 </tr>
                 <tr>
                     <td>
@@ -61,4 +65,5 @@
         </div>
     </div>
 }
+
 

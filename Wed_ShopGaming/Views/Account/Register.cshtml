@@ -1,11 +1,11 @@
-﻿@model Wed_ShopGaming.Models.RegisterViewModel
+﻿@model Wed_ShopGaming.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>

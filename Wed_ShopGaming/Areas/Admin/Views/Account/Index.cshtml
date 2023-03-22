@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Wed_ShopGaming.ViewModels.ListUserViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row p-2">
+    <div class="col-lg-7">
+        <table class="table">
+            <tr>
+                <th>Ten user</th>
+                <th>Vai Tro</th>
+                <th>Tac Vu</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.User.UserName</td>
+                    <td> @item.NameRole</td>
+                    <td> @Html.ActionLink("Delete","Delete", new { id = item.User.Id })</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
