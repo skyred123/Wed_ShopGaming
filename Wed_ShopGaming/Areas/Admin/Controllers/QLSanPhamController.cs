@@ -113,6 +113,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             List<ThongSo> thongso = null;
             ThongSoSPViewModel model = new ThongSoSPViewModel();
             return View(model);
+            asdsadasdasdsadasd
         }*/
         #endregion
     }
