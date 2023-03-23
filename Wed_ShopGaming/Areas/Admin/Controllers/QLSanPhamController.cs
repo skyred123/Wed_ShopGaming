@@ -34,7 +34,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             if (entity.Name != null)
             {
                 LoaiSP loaiSP = new LoaiSP();
-                loaiSP.Id = Guid.NewGuid();
+                loaiSP.Id = Guid.NewGuid().ToString();
                 loaiSP.Name = entity.Name;
                 context.LoaiSPs.Add(loaiSP);
                 context.SaveChanges();
@@ -45,8 +45,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
         {
             if (id != null)
             {
-                var item = Guid.Parse(id);
-                LoaiSP loaiSP = (context.LoaiSPs.ToList()).FirstOrDefault(e => e.Id == item);
+                LoaiSP loaiSP = (context.LoaiSPs.ToList()).FirstOrDefault(e => e.Id == id);
                 if (loaiSP != null)
                 {
                     context.LoaiSPs.Remove(loaiSP);
@@ -69,7 +68,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             }
             else
             {
-                thongso = context.LoaiSPs.ToList().FirstOrDefault(e=>e.Id == Guid.Parse(id)).ThongSos.ToList();
+                thongso = context.LoaiSPs.ToList().FirstOrDefault(e=>e.Id == id).ThongSos.ToList();
             }
             ThongSoSPViewModel model = new ThongSoSPViewModel();
             model.listThongSos = thongso;
@@ -82,9 +81,9 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             if (model != null)
             {
                 ThongSo thongSo = new ThongSo();
-                thongSo.Id = Guid.NewGuid();
+                thongSo.Id = Guid.NewGuid().ToString();
                 thongSo.Name = model.Name;
-                thongSo.IdLoaiSP = Guid.Parse(model.IdLoai);
+                thongSo.IdLoaiSP = model.IdLoai;
                 context.ThongSos.Add(thongSo);
                 context.SaveChanges();
             }
@@ -94,8 +93,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
         {
             if (id != null)
             {
-                var item = Guid.Parse(id);
-                ThongSo thongSo = (context.ThongSos.ToList()).FirstOrDefault(e => e.Id == item);
+                ThongSo thongSo = (context.ThongSos.ToList()).FirstOrDefault(e => e.Id == id);
                 if (thongSo != null)
                 {
                     context.ThongSos.Remove(thongSo);
@@ -108,14 +106,79 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
         #endregion
 
         #region Quan ly hang san pham
-        /*public ActionResult Hang    SP(string id)
+        public ActionResult HangSP()
         {
-            List<ThongSo> thongso = null;
-            ThongSoSPViewModel model = new ThongSoSPViewModel();
+            HangSPViewModel model = new HangSPViewModel
+            {
+                Hangs = context.Hangs.ToList(),
+            };
             return View(model);
-            asdsadasdasdsadasd
-            test khoa
-        }*/
+        }
+        [HttpPost]
+        public ActionResult Create_HangSP(HangSPViewModel model)
+        {
+            if (model != null)
+            {
+                Hang hang = new Hang();
+                hang.Id = Guid.NewGuid().ToString();
+                hang.Name = model.Name;
+                context.Hangs.Add(hang);
+                context.SaveChanges();
+            }
+            return RedirectToAction("HangSP", "QLSanPham", new { area = "Admin" });
+        }
+        public ActionResult Delete_HangSP(String id)
+        {
+            if (id != null)
+            {
+                Hang hang = (context.Hangs.ToList()).FirstOrDefault(e => e.Id == id);
+                if (hang != null)
+                {
+                    context.Hangs.Remove(hang);
+                    context.SaveChanges();
+                    return RedirectToAction("HangSP", "QLSanPham", new { area = "Admin" });
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
+
+        #region Quan ly cau hinh san pham
+        public ActionResult CauHinhSP()
+        {
+            CauHinhSPViewModel model = new CauHinhSPViewModel
+            {
+                CauHinhs = context.CauHinhs.ToList(),
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Create_CauHinhSP(CauHinhSPViewModel model)
+        {
+            if (model != null)
+            {
+                CauHinh cauHinh = new CauHinh();
+                cauHinh.Id = Guid.NewGuid().ToString();
+                cauHinh.Name = model.Name;
+                context.CauHinhs.Add(cauHinh);
+                context.SaveChanges();
+            }
+            return RedirectToAction("CauHinhSP", "QLSanPham", new { area = "Admin" });
+        }
+        public ActionResult Delete_CauHinhSP(String id)
+        {
+            if (id != null)
+            {
+                CauHinh cauHinh = (context.CauHinhs.ToList()).FirstOrDefault(e => e.Id == id);
+                if (cauHinh != null)
+                {
+                    context.CauHinhs.Remove(cauHinh);
+                    context.SaveChanges();
+                    return RedirectToAction("CauHinhSP", "QLSanPham", new { area = "Admin" });
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
         #endregion
     }
 }
