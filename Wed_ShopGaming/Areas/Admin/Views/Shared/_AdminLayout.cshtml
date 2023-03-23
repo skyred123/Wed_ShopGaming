@@ -92,7 +92,7 @@
                             <div class="btn-group ml-3">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    @Html.Label("Hello " + User.Identity.GetUserName() + "!")
+                                    @Html.Label("Hello " + User.Identity.GetUserName() + "!",htmlAttributes: new { @class="d-flex" })
                                     @Html.ActionLink("Log Out", "Logout", "Account")
                                 </div>
                             </div>
