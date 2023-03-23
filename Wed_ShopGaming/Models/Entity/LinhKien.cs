@@ -21,5 +21,6 @@ namespace Wed_ShopGaming.Models.Entity
 
         [ForeignKey(nameof(IdThongSo))]
         public ThongSo ThongSo { get; set; }
+        public virtual ICollection<MayTinh> MayTinhs { get; set; }
     }
 }

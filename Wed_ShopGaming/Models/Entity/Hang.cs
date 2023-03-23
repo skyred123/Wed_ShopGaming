@@ -12,5 +12,6 @@ namespace Wed_ShopGaming.Models.Entity
         [StringLength(128)]
         public string Id { get; set; }
         public string Name { get; set; }
+        public virtual ICollection<SanPham> SanPhams { get; set; }
     }
 }

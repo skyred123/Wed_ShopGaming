@@ -177,13 +177,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303221759505_update database.cs" />
-    <Compile Include="Migrations\202303221759505_update database.designer.cs">
-      <DependentUpon>202303221759505_update database.cs</DependentUpon>
+    <Compile Include="Migrations\202303230940484_database.cs" />
+    <Compile Include="Migrations\202303230940484_database.designer.cs">
+      <DependentUpon>202303230940484_database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity\CauHinh.cs" />
-    <Compile Include="Models\Entity\CT_LinhKien.cs" />
     <Compile Include="Models\Entity\HinhAnh.cs" />
     <Compile Include="Models\Entity\MayTinh.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -579,8 +578,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202303221759505_update database.resx">
-      <DependentUpon>202303221759505_update database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303230940484_database.resx">
+      <DependentUpon>202303230940484_database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

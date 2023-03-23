@@ -18,5 +18,7 @@ namespace Wed_ShopGaming.Models.Entity
 
         [ForeignKey(nameof(IdLoaiSP))]
         public LoaiSP LoaiSP { get; set; }
+
+        public virtual ICollection<LinhKien> LinhKiens { get; set; }
     }
 }
