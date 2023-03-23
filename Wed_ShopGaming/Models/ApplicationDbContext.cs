@@ -15,7 +15,11 @@ namespace Wed_ShopGaming.Models
             : base("ConnectionStrings", throwIfV1Schema: false)
         {
         }
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CT_LinhKien>().HasKey(e=> new { e.IdLinhKien, e.IdMayTinh });
+        }
         public static ApplicationDbContext Create()
         {
             ApplicationDbContext dbContext= new ApplicationDbContext();
@@ -28,5 +32,9 @@ namespace Wed_ShopGaming.Models
         public DbSet<LinhKien> LinhKiens { get;set; }
         public DbSet<LoaiSP> LoaiSPs { get;set; }
         public DbSet<ThongSo> ThongSos { get;set; }
+        public DbSet<CauHinh> CauHinhs { get;set; }
+        public DbSet<MayTinh> MayTinhs { get;set; }
+        public DbSet<CT_LinhKien> CT_LinhKiens { get;set; }
+        public DbSet<HinhAnh> HinhAnhs { get;set; }
     }
 }

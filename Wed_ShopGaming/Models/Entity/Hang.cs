@@ -9,7 +9,8 @@ namespace Wed_ShopGaming.Models.Entity
     public class Hang
     {
         [Key]
-        public Guid Id { get; set; }
+        [StringLength(128)]
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 }

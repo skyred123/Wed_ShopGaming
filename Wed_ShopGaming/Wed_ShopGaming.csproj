@@ -177,11 +177,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303220854301_add database sanpham.cs" />
-    <Compile Include="Migrations\202303220854301_add database sanpham.designer.cs">
-      <DependentUpon>202303220854301_add database sanpham.cs</DependentUpon>
+    <Compile Include="Migrations\202303221759505_update database.cs" />
+    <Compile Include="Migrations\202303221759505_update database.designer.cs">
+      <DependentUpon>202303221759505_update database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Entity\CauHinh.cs" />
+    <Compile Include="Models\Entity\CT_LinhKien.cs" />
+    <Compile Include="Models\Entity\HinhAnh.cs" />
+    <Compile Include="Models\Entity\MayTinh.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Entity\Hang.cs" />
@@ -193,6 +197,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CauHinhSPViewModel.cs" />
+    <Compile Include="ViewModels\HangSPViewModel.cs" />
     <Compile Include="ViewModels\LoaiSPViewModel.cs" />
     <Compile Include="ViewModels\ThongSoSPViewModel.cs" />
   </ItemGroup>
@@ -533,6 +539,8 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QLSanPham\ThongSoSP.cshtml" />
+    <Content Include="Areas\Admin\Views\QLSanPham\HangSP.cshtml" />
+    <Content Include="Areas\Admin\Views\QLSanPham\CauHinhSP.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -571,8 +579,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202303220854301_add database sanpham.resx">
-      <DependentUpon>202303220854301_add database sanpham.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303221759505_update database.resx">
+      <DependentUpon>202303221759505_update database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

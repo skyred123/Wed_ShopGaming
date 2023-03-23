@@ -7,16 +7,16 @@ using System.Web;
 
 namespace Wed_ShopGaming.Models.Entity
 {
-    public class ThongSo
+    public class CT_LinhKien
     {
-        [Key]
         [StringLength(128)]
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string IdLinhKien { get; set; }
         [StringLength(128)]
-        public string IdLoaiSP { get; set; }
+        public string IdMayTinh { get; set; }
 
-        [ForeignKey(nameof(IdLoaiSP))]
-        public LoaiSP LoaiSP { get; set; }
+        [ForeignKey(nameof(IdLinhKien))]
+        public LinhKien LinhKien { get; set; }
+        [ForeignKey(nameof(IdMayTinh))]
+        public MayTinh MayTinh { get; set; }
     }
 }

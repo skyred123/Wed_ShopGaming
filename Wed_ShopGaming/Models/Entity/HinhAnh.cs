@@ -7,19 +7,14 @@ using System.Web;
 
 namespace Wed_ShopGaming.Models.Entity
 {
-    public class LinhKien
+    public class HinhAnh
     {
-        [Key]
         [StringLength(128)]
         public string Id { get; set; }
+        public byte[] Img { get; set; }
         [StringLength(128)]
-        public string IdThongSo { get; set; }
-
-        [ForeignKey(nameof(Id))]
+        public string IDSanPham { get; set; }
+        [ForeignKey(nameof(IDSanPham))]
         public SanPham SanPham { get; set; }
-        
-
-        [ForeignKey(nameof(IdThongSo))]
-        public ThongSo ThongSo { get; set; }
     }
 }
