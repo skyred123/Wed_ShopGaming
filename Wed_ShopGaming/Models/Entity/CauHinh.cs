@@ -6,14 +6,10 @@ using System.Web;
 
 namespace Wed_ShopGaming.Models.Entity
 {
-    public class LoaiSP
+    public class CauHinh
     {
-        [Key]
         [StringLength(128)]
         public string Id { get; set; }
-
         public string Name { get; set; }
-
-        public virtual ICollection<ThongSo> ThongSos { get; set; }
-    } 
+    }
 }
