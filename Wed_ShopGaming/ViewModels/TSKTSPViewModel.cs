@@ -8,22 +8,20 @@ using Wed_ShopGaming.Models.Entity;
 
 namespace Wed_ShopGaming.ViewModels
 {
-    public class ThongSoSPViewModel
+    public class TSKTSPViewModel
     {
         [DisplayName("Ma Loai")]
-        [Required]
         public string Id { get; set; }
 
         [DisplayName("Ten")]
         [Required]
         public string Name { get; set; }
 
-        [DisplayName("Loai")]
+        [DisplayName("Mo Ta")]
         [Required]
-        public string IdLoai { get; set; }
+        public string Description { get; set; }
 
-        public List<ThongSo> listThongSos = new List<ThongSo>();
-        public List<LoaiSP> listloaiSPs = new List<LoaiSP>();
+        public List<TSKT> listTSKT = new List<TSKT>();
 
     }
 }

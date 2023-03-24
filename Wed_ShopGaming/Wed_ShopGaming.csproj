@@ -171,15 +171,20 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLSanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303230940484_database.cs" />
-    <Compile Include="Migrations\202303230940484_database.designer.cs">
-      <DependentUpon>202303230940484_database.cs</DependentUpon>
+    <Compile Include="Migrations\202303231547501_database.cs" />
+    <Compile Include="Migrations\202303231547501_database.designer.cs">
+      <DependentUpon>202303231547501_database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303231604091_database Description.cs" />
+    <Compile Include="Migrations\202303231604091_database Description.designer.cs">
+      <DependentUpon>202303231604091_database Description.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity\CauHinh.cs" />
@@ -191,15 +196,17 @@
     <Compile Include="Models\Entity\LinhKien.cs" />
     <Compile Include="Models\Entity\LoaiSP.cs" />
     <Compile Include="Models\Entity\SanPham.cs" />
-    <Compile Include="Models\Entity\ThongSo.cs" />
+    <Compile Include="Models\Entity\TSKT.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CauHinhSPViewModel.cs" />
+    <Compile Include="ViewModels\CT_TSKTViewModel.cs" />
     <Compile Include="ViewModels\HangSPViewModel.cs" />
     <Compile Include="ViewModels\LoaiSPViewModel.cs" />
-    <Compile Include="ViewModels\ThongSoSPViewModel.cs" />
+    <Compile Include="ViewModels\SanPhamViewModels.cs" />
+    <Compile Include="ViewModels\TSKTSPViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Contents_Custom\css\bootstrap-grid.css" />
@@ -537,9 +544,11 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QLSanPham\ThongSoSP.cshtml" />
+    <Content Include="Areas\Admin\Views\QLSanPham\TSKTSP.cshtml" />
     <Content Include="Areas\Admin\Views\QLSanPham\HangSP.cshtml" />
     <Content Include="Areas\Admin\Views\QLSanPham\CauHinhSP.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\LinhKien.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Describe_LinhKien.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -562,7 +571,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutQLSanPham.cshtml" />
     <Content Include="Areas\Admin\Views\QLSanPham\LoaiSP.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -578,8 +586,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202303230940484_database.resx">
-      <DependentUpon>202303230940484_database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303231547501_database.resx">
+      <DependentUpon>202303231547501_database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303231604091_database Description.resx">
+      <DependentUpon>202303231604091_database Description.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -34,7 +34,7 @@ namespace Wed_ShopGaming.Models
                 .Map(m => m.ToTable("CT_LinhKien").MapLeftKey("IdLinhKien").MapRightKey("IdMayTinh"));
 
             modelBuilder.Entity<LoaiSP>()
-                .HasMany(e => e.ThongSos)
+                .HasMany(e => e.LinhKiens)
                 .WithOptional(e => e.LoaiSP)
                 .HasForeignKey(e => e.IdLoaiSP);
 
@@ -50,24 +50,28 @@ namespace Wed_ShopGaming.Models
             modelBuilder.Entity<SanPham>()
                 .HasOptional(e => e.MayTinh)
                 .WithRequired(e => e.SanPham);
-
-            modelBuilder.Entity<ThongSo>()
-                .HasMany(e => e.LinhKiens)
-                .WithOptional(e => e.ThongSo)
-                .HasForeignKey(e => e.IdThongSo);
+            modelBuilder.Entity<LinhKien>()
+                .HasMany(e => e.TSKTs)
+                .WithMany(e => e.LinhKiens)
+                .Map(m => m.ToTable("CT_TSKT").MapLeftKey("IdLinhKien").MapRightKey("IdTSKT"));
         }
         public static ApplicationDbContext Create()
         {
             ApplicationDbContext dbContext= new ApplicationDbContext();
-            /*dbContext.ThongSos.Include(e => e.LoaiSP).Load();
-            dbContext.LoaiSPs.Include(e => e.ThongSos).Load();*/
+            dbContext.CauHinhs.Include(e => e.MayTinhs).Load();
+            dbContext.Hangs.Include(e => e.SanPhams).Load();
+            dbContext.HinhAnhs.Include(e => e.SanPham).Load();
+            dbContext.LinhKiens.Include(e => e.SanPham).Include(e => e.MayTinhs).Include(e => e.LoaiSP).Include(e => e.TSKTs).Load();
+            dbContext.LoaiSPs.Include(e => e.LinhKiens).Load();
+            dbContext.MayTinhs.Include(e => e.SanPham).Include(e => e.LinhKiens).Include(e => e.CauHinh).Load();
+            dbContext.SanPhams.Include(e => e.MayTinh).Include(e => e.LinhKien).Include(e => e.HinhAnhs).Include(e => e.Hang).Load();
             return dbContext;
         }
         public DbSet<Hang> Hangs { get; set; }
         public DbSet<SanPham> SanPhams { get; set; }
         public DbSet<LinhKien> LinhKiens { get;set; }
         public DbSet<LoaiSP> LoaiSPs { get;set; }
-        public DbSet<ThongSo> ThongSos { get;set; }
+        public DbSet<TSKT> TSKTs { get;set; }
         public DbSet<CauHinh> CauHinhs { get;set; }
         public DbSet<MayTinh> MayTinhs { get;set; }
         public DbSet<HinhAnh> HinhAnhs { get;set; }

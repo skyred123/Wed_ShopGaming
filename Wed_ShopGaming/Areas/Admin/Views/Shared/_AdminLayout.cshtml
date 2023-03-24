@@ -71,13 +71,31 @@
                             <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
                             <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
                         </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 @Html.ActionLink("Danh Sach Nguoi Dung", "Index", "Account", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
-                                @Html.ActionLink("Quan Ly San Pham", "LoaiSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown" >Quan ly san pham<span class=""></span></a>
+                                        <ul class="dropdown-menu bg-dark">
+                                            <li>
+                                                @Html.ActionLink("Loai", "LoaiSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Hinh", "LoaiSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Hang", "HangSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Cau Hinh", "CauHinhSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Thong So", "ThongSoSP", "QlSanPham", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                                 <a href="" class="btn px-0">
@@ -93,18 +111,18 @@
                                 @if (Request.IsAuthenticated)
                                 {
                                     @Html.AntiForgeryToken()
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        @Html.Label("Hello " + User.Identity.GetUserName() + "!", htmlAttributes: new { @class = "d-flex " })
-                                        <a href="~/Account/Logout">Log Out</a>
+                                    <a href="" class="dropdown-toggle nav-item nav-link text-light" data-toggle="dropdown">My Account<span class=""></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right text-light">
+                                        @Html.Label("Hello " + User.Identity.GetUserName() + "!", htmlAttributes: new { @class = "d-flex text-light" })
+                                        <a href="~/Account/Logout" class="text-light">Log Out</a>
                                     </div>
                                 }
                                 else
                                 {
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="~/Account/Register" class="d-flex">Register</a>
-                                        <a href="~/Account/Login">Log in</a>
+                                    <a href="" class="dropdown-toggle nav-item nav-link text-light" data-toggle="dropdown">My Account<span class=""></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="~/Account/Register" class="d-flex text-light">Register</a>
+                                        <a href="~/Account/Login" class="text-light">Log in</a>
                                     </div>
                                 }
                             </div>

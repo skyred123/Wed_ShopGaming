@@ -7,18 +7,14 @@ using System.Web;
 
 namespace Wed_ShopGaming.Models.Entity
 {
-    public class ThongSo
+    public class TSKT
     {
         [Key]
         [StringLength(128)]
         public string Id { get; set; }
+
         public string Name { get; set; }
-        [StringLength(128)]
-        public string IdLoaiSP { get; set; }
-
-        [ForeignKey(nameof(IdLoaiSP))]
-        public LoaiSP LoaiSP { get; set; }
-
+        public string Description { get; set; }
         public virtual ICollection<LinhKien> LinhKiens { get; set; }
     }
 }

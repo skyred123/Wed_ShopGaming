@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/Content/modernizr")*@
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">*@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">*@
     <!-- Libraries Stylesheet -->
     <link href="~/Contents_Custom/lib/animate/animate.min.css" rel="stylesheet" />
     <script src="~/Contents_Custom/lib/owlcarousel/owl.carousel.min.js"></script>
@@ -92,18 +92,18 @@
                                 @if (Request.IsAuthenticated)
                                 {
                                     @Html.AntiForgeryToken()
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                                        @Html.ActionLink("Log Out", "Logout", "Account")
+                                <a href="" class="dropdown-toggle nav-item nav-link text-light" data-toggle="dropdown">My Account<span class=""></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right text-light">
+                                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="text-light" })
+                                        @Html.ActionLink("Log Out", "Logout", "Account",htmlAttributes: new{@class= "text-light" })
                                     </div>
                                 }
                                 else
                                 {
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "d-flex " })
-                                        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                            <a href="" class="dropdown-toggle nav-item nav-link text-light" data-toggle="dropdown">My Account<span class=""></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "d-flex text-light" })
+                                        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" ,@class = " text-light" })
                                     </div>
                                 }
                             </div>
