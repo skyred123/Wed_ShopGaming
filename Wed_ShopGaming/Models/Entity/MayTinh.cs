@@ -18,5 +18,7 @@ namespace Wed_ShopGaming.Models.Entity
         public CauHinh CauHinh { get; set;}
         [ForeignKey(nameof(Id))]
         public SanPham SanPham { get; set;}
+
+        public virtual ICollection<LinhKien> LinhKiens { get; set; }
     }
 }

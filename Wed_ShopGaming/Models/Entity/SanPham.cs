@@ -18,5 +18,11 @@ namespace Wed_ShopGaming.Models.Entity
         public string IdHang { get; set; }
         [ForeignKey(nameof(IdHang))]
         public Hang Hang { get; set; }
+
+        public virtual ICollection<HinhAnh> HinhAnhs { get; set; }
+
+        public virtual LinhKien LinhKien { get; set; }
+
+        public virtual MayTinh MayTinh { get; set; }
     }
 }

@@ -1,9 +1,11 @@
-﻿@model Wed_ShopGaming.ViewModels.HangSPViewModel
+﻿@model Wed_ShopGaming.ViewModels.TSKTSPViewModel
+
 @{
-    ViewBag.Title = "HangSP";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "ThongSoSP";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutQLSanPham.cshtml";
 }
-@using (Html.BeginForm("Create_HangSP", "QLSanPham", new { area = "Admin" }, FormMethod.Post))
+
+@using (Html.BeginForm("Create_TSKTSP", "QLSanPham", new { area = "Admin" }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row p-2">
@@ -13,20 +15,23 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
                 </tr>
-                @if (Model != null && Model.Hangs.Count() != 0)
+                @if (Model != null)
                 {
-                    foreach (var item in Model.Hangs)
+                    foreach (var item in Model.listTSKT)
                     {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                @Html.ActionLink("Chi tiet", "ThongSoSP", new { id = item.Id })
+                                @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @Html.ActionLink("Xoa", "Delete_HangSP", new { id = item.Id })
+                                @Html.ActionLink("Delete", "Delete_ThongSoSP", new { id = item.Id })
                             </td>
                         </tr>
                     }
@@ -48,6 +53,17 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <input type="submit" value="Create" class="btn btn-default text-black" />
                     </td>
@@ -56,5 +72,3 @@
         </div>
     </div>
 }
-
-
