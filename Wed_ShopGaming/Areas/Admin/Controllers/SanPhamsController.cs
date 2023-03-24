@@ -58,6 +58,37 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult Description_LinhKien(string id)
+        {
+            var sp = context.SanPhams.ToList().FirstOrDefault(e => e.Id == id);
+            if (sp == null)
+            {
+                return RedirectToAction("LinhKien", "SanPhams", new { area = "Admin" });
+            }
+            ListDescription_LinhKienViewModel model = new ListDescription_LinhKienViewModel();
+            model.description_LinhKiens = new List<Description_LinhKienViewModel>();
+            foreach (var item in context.TSKTs.ToList())
+            {
+                Description_LinhKienViewModel temp = new Description_LinhKienViewModel();
+                temp.Id = item.Id;
+                temp.IdLinhKien = id;
+                temp.Name = item.Name;
+                temp.Description = item.Description;
+                temp.IsCheck = false;
+                model.description_LinhKiens.Add(temp);
+            }
+            ViewBag.SanPham_Description = context.SanPhams.ToList().FirstOrDefault(e=>e.Id==id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Description_LinhKien(ListDescription_LinhKienViewModel model)
+        {
+            /*model = new Description_LinhKienViewModel();
+            model.Id = id;
+            model.TSKTs = context.TSKTs.ToList();*/
+            //var model = context.TSKTs.ToList().FirstOrDefault();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Delete_LinhKien(string id)
         {
             return RedirectToAction("Index", "Home");
