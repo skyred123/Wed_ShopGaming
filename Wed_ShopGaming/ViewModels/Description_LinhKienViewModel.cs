@@ -10,6 +10,7 @@ namespace Wed_ShopGaming.ViewModels
     {
         public string Id { get; set; }
 
+        public string IdLinhKien { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
