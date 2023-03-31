@@ -8,7 +8,7 @@ using Wed_ShopGaming.Models.Entity;
 
 namespace Wed_ShopGaming.ViewModels
 {
-    public class LoaiSPViewModel
+    public class LoaiLKViewModel
     {
         [DisplayName("Ma Loai")]
         [Required]
@@ -18,6 +18,18 @@ namespace Wed_ShopGaming.ViewModels
         [Required]
         public string Name { get; set; }
 
-        public ICollection<LoaiSP> Loais { get; set; }
+        public ICollection<LoaiLK> Loais { get; set; }
+    }
+    public class LoaiMTViewModel
+    {
+        [DisplayName("Ma Loai")]
+        [Required]
+        public string Id { get; set; }
+
+        [DisplayName("Ten Loai")]
+        [Required]
+        public string Name { get; set; }
+
+        public ICollection<LoaiMT> Loais { get; set; }
     }
 }

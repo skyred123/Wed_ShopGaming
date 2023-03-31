@@ -1,8 +1,27 @@
-﻿
+﻿@model IEnumerable<Wed_ShopGaming.Models.Entity.SanPham>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hello Customer</h2>
+<div>
+    <div class="p-3 ">
+        <h3 class="">LapTop</h3>
+    </div>
+    <div>
+        @Html.Partial("LapTopView")
+    </div>
+    <div class="p-3 ">
+        <h3 class="">May Tinh</h3>
+    </div>
+    <div>
+
+    </div>
+    <div class="p-3 ">
+        <h3 class="">Linh Kien</h3>
+    </div>
+    <div>
+
+    </div>
+</div>
 

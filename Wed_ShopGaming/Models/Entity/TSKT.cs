@@ -15,6 +15,6 @@ namespace Wed_ShopGaming.Models.Entity
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<LinhKien> LinhKiens { get; set; }
+        public virtual ICollection<CT_TSKT> CT_TSKTs { get; set; }
     }
 }

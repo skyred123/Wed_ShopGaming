@@ -16,6 +16,7 @@ namespace Wed_ShopGaming.Models.Entity
         public long Price { get; set; }
         [StringLength(128)]
         public string IdHang { get; set; }
+
         [ForeignKey(nameof(IdHang))]
         public Hang Hang { get; set; }
 
