@@ -8,9 +8,8 @@ namespace Wed_ShopGaming.ViewModels
 {
     public class Description_LinhKienViewModel
     {
-        public string Id { get; set; }
+        public string IdTSKT { get; set; }
 
-        public string IdLinhKien { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }

@@ -64,7 +64,7 @@ namespace Wed_ShopGaming.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace Wed_ShopGaming.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_dbContext));
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_dbContext));

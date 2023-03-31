@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Wed_ShopGaming.Models;
+using PagedList;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -16,9 +17,13 @@ namespace Wed_ShopGaming.Controllers
         {
             context = ApplicationDbContext.Create();
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View();
+            if (page == null) page = 1;
+            var sanPham = context.SanPhams.ToList();
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(sanPham.ToPagedList(pageNumber, pageSize)); ;
         }
        
     }

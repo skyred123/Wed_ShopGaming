@@ -1,0 +1,84 @@
+﻿@model Wed_ShopGaming.ViewModels.ListDetails_MayTinhViewModel
+@{
+    ViewBag.Title = "Description_LinhKien";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var SP = (Wed_ShopGaming.Models.Entity.SanPham)ViewBag.MayTinh;
+}
+@Html.AntiForgeryToken()
+<div class="row p-2">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("Ten")
+            </th>
+            <th>
+                @Html.Label("So luong")
+            </th>
+            <th>
+                @Html.Label("Gia")
+            </th>
+            <th>
+                @Html.Label("hang")
+            </th>
+            <th>
+                @Html.Label("Cau Hinh")
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label(SP.Name)
+            </td>
+            <td>
+                @Html.Label(SP.Amount.ToString())
+            </td>
+            <td>
+                @Html.Label(SP.Price.ToString())
+            </td>
+            <td>
+                @Html.Label(SP.Hang.Name)
+            </td>
+            <td>
+                @Html.Label(SP.MayTinh.CauHinh.Name)
+            </td>
+        </tr>
+    </table>
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @using (Html.BeginForm("Details_MayTinh", "MayTinh", new { idSanPham = SP.Id }, FormMethod.Post))
+    {
+        <table class="table">
+
+            @for (int i = 0; i < Model.Details_MayTinh.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBoxFor(m => m.Details_MayTinh[i].IsCheck)
+                        @Html.HiddenFor(m => m.Details_MayTinh[i].Id)
+                        @Html.HiddenFor(m => m.Details_MayTinh[i].Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Details_MayTinh[i].Name)
+                    </td>
+                </tr>
+            }
+        </table>
+        <div>
+            <input type="submit" value="submit" class="btn btn-primary" />
+        </div>
+    }
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

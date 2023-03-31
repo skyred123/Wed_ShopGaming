@@ -19,38 +19,78 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
         }
         // GET: QLSanPham
         #region Quan ly loai san pham
-        public ActionResult LoaiSP()
+        public ActionResult LoaiLK()
         {
-            List<LoaiSP> list = context.LoaiSPs.ToList();
-            LoaiSPViewModel model = new LoaiSPViewModel()
+            List<LoaiLK> list = context.LoaiLKs.ToList();
+            LoaiLKViewModel model = new LoaiLKViewModel()
             {
                 Loais = list,
             };
             return View(model);
         }
         [HttpPost]
-        public ActionResult Create_LoaiSP(LoaiSPViewModel entity)
+        public ActionResult Create_LoaiLK(LoaiLKViewModel entity)
         {
             if (entity.Name != null)
             {
-                LoaiSP loaiSP = new LoaiSP();
+                LoaiLK loaiSP = new LoaiLK();
                 loaiSP.Id = Guid.NewGuid().ToString();
                 loaiSP.Name = entity.Name;
-                context.LoaiSPs.Add(loaiSP);
+                context.LoaiLKs.Add(loaiSP);
                 context.SaveChanges();
             }
-            return RedirectToAction("LoaiSP", "QLSanPham",new { area = "Admin" });
+            return RedirectToAction("LoaiLK", "QLSanPham",new { area = "Admin" });
         }
-        public ActionResult Delete_LoaiSP(String id)
+        public ActionResult Delete_LoaiLK(String id)
         {
             if (id != null)
             {
-                LoaiSP loaiSP = (context.LoaiSPs.ToList()).FirstOrDefault(e => e.Id == id);
+                LoaiLK loaiSP = (context.LoaiLKs.ToList()).FirstOrDefault(e => e.Id == id);
                 if (loaiSP != null)
                 {
-                    context.LoaiSPs.Remove(loaiSP);
+                    context.LoaiLKs.Remove(loaiSP);
                     context.SaveChanges();
-                    return RedirectToAction("LoaiSP", "QLSanPham", new { area = "Admin" });
+                    return RedirectToAction("LoaiLK", "QLSanPham", new { area = "Admin" });
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        #endregion
+
+        #region Quan ly loai san pham
+        public ActionResult LoaiMT()
+        {
+            List<LoaiMT> list = context.LoaiMTs.ToList();
+            LoaiMTViewModel model = new LoaiMTViewModel()
+            {
+                Loais = list,
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Create_LoaiMT(LoaiMTViewModel entity)
+        {
+            if (entity.Name != null)
+            {
+                LoaiMT loaiSP = new LoaiMT();
+                loaiSP.Id = Guid.NewGuid().ToString();
+                loaiSP.Name = entity.Name;
+                context.LoaiMTs.Add(loaiSP);
+                context.SaveChanges();
+            }
+            return RedirectToAction("LoaiMT", "QLSanPham", new { area = "Admin" });
+        }
+        public ActionResult Delete_LoaiMT(String id)
+        {
+            if (id != null)
+            {
+                LoaiMT loaiSP = (context.LoaiMTs.ToList()).FirstOrDefault(e => e.Id == id);
+                if (loaiSP != null)
+                {
+                    context.LoaiMTs.Remove(loaiSP);
+                    context.SaveChanges();
+                    return RedirectToAction("LoaiMT", "QLSanPham", new { area = "Admin" });
                 }
             }
             return RedirectToAction("Index", "Home");
