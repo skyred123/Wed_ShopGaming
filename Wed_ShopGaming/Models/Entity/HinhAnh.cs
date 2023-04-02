@@ -13,7 +13,7 @@ namespace Wed_ShopGaming.Models.Entity
         public string Id { get; set; }
 
         public int STT { get; set; }
-        public byte[] Img { get; set; }
+        public string Img { get; set; }
         [StringLength(128)]
         public string IDSanPham { get; set; }
         [ForeignKey(nameof(IDSanPham))]

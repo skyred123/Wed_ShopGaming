@@ -41,7 +41,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create_LinhKien(LinhKienViewModels model)
+        public ActionResult Create_LinhKien(LinhKienViewModels model, List<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {

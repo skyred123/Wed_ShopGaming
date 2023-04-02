@@ -65,4 +65,16 @@ namespace Wed_ShopGaming.ViewModels
         public string IdLoai { get; set; }
         public List<LoaiMT> LoaiSP { get; set; }
     }
+    public class PagingSPViewModel
+    {
+        public int pageNumber { get; set; }
+        public int pageSize { get; set; } 
+        public int? page { get; set; } 
+        public int totalPage { get; set; }
+
+        public List<MayTinh> LapTop { get; set; }
+        public List<MayTinh> MayTinh { get; set; }
+        public List<LinhKien> LinhKien { get;set; }
+        public List<MayTinh> DanhChoBan { get; set; }
+    }
 }

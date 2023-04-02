@@ -4,10 +4,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("Create_LinhKien", "LinhKien", new { area = "Admin" }, FormMethod.Post))
+@using (Html.BeginForm("Create_LinhKien", "LinhKien", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
-    <div class="row p-2">
+        @Html.AntiForgeryToken()
+        <div class="row p-2">
         <div class="col-lg-7">
             <table class="table">
                 <tr>
@@ -28,9 +28,9 @@
                     </th>
                 </tr>
                 @if (Model != null)
-                {
-                    foreach (var item in Model.sanPham)
-                    {
+{
+    foreach (var item in Model.sanPham)
+    {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
@@ -106,6 +106,15 @@
                 <tr>
                     <td>
                         @Html.DropDownListFor(model => model.IdLoai, new SelectList(Model.LoaiSP, "Id", "Name"), htmlAttributes: new { @class = "control-label h5" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="row d-flex">
+                            <div class="form-group col-lg-10">
+                                <input type="file" class="form-control" id="file" name="file" multiple="multiple" />
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
