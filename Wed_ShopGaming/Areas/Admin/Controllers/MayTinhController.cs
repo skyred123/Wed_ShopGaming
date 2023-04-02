@@ -52,6 +52,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 {
                     Id = id,
                     IdCH = model.IdCauHinh,
+                    IdLoaiMT = model.IdLoai,
                 };
                 SanPham sanPham = new SanPham
                 {

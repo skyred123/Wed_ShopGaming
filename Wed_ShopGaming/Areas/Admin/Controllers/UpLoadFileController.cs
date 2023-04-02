@@ -74,7 +74,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                     HinhAnh hinhAnh = new HinhAnh();
                     hinhAnh.IDSanPham = idSanPham;
                     hinhAnh.Id = Guid.NewGuid().ToString();
-                    hinhAnh.Img = data;
+                    //hinhAnh.Img = data;
                     hinhAnh.STT = i;
                     i++;
                     context.HinhAnhs.Add(hinhAnh);
@@ -82,11 +82,6 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
-        }
-        public ActionResult RenderImage(string file)
-        {
-            byte[] bytes = context.HinhAnhs.FirstOrDefault(e=>e.Id == file).Img;
-            return File(bytes, "image/png");
         }
         [HttpPost]
         public ActionResult Delete_File(ListHinhAnhViewModel viewModel, string idSanPham)
