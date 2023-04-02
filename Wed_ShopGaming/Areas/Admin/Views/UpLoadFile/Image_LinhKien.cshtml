@@ -94,7 +94,7 @@
             {
                 <div class="p-3 col-lg-2">
                     @Html.CheckBoxFor(m => m.HinhAnhs[i].IsCheck, htmlAttributes: new { @class = "", @name = "check" })
-                    <img for="check" width="50%" height="50%" src="@Url.Content(Model.HinhAnhs[i].Img)" />
+                    <img for="check" width="250" height="250" src="~/Contents_Custom/SaveImage/@Model.HinhAnhs[i].Img" />
                     @Html.HiddenFor(m => m.HinhAnhs[i].Id)
                     @Html.HiddenFor(m => m.HinhAnhs[i].IDSanPham)
                 </div>

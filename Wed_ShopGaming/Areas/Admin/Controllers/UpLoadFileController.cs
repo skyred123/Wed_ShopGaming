@@ -34,6 +34,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 model.Id = item.Id;
                 model.IDSanPham = item.IDSanPham;
                 model.IsCheck = false;
+                model.Img= item.Img;
                 listModel.HinhAnhs.Add(model);
             }
             return View(listModel);
@@ -54,6 +55,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 model.Id = item.Id;
                 model.IDSanPham = item.IDSanPham;
                 model.IsCheck = false;
+                model.Img = item.Img;
                 listModel.HinhAnhs.Add(model);
             }
             return View(listModel);
@@ -66,21 +68,16 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             {
                 if (fileBase != null && fileBase.ContentLength > 0)
                 {
-                    byte[] data;
-                    using (BinaryReader br = new BinaryReader(fileBase.InputStream))
-                    {
-                        data = br.ReadBytes(fileBase.ContentLength);
-                    }
                     HinhAnh hinhAnh = new HinhAnh();
                     hinhAnh.IDSanPham = idSanPham;
                     hinhAnh.Id = Guid.NewGuid().ToString();
 
-                    string fileName = Path.GetFileNameWithoutExtension(fileBase.FileName);
+                    string fileName = Path.GetFileName(fileBase.FileName);
                     string extention = Path.GetExtension(fileBase.FileName);
-                    fileName = fileName + extention;
-                    hinhAnh.Img = "~/Contents_Custom/SaveImage/" + fileName;
+                    fileName = Guid.NewGuid().ToString() + fileName.Trim();
+                    hinhAnh.Img = fileName;
                 
-                    fileBase.SaveAs(Path.Combine(Server.MapPath("~/Contents_Custom/SaveImage/"), fileName));
+                    fileBase.SaveAs(Path.Combine(Server.MapPath("~/Contents_Custom/SaveImage"), fileName));
 
                     hinhAnh.STT = i;
                     i++;

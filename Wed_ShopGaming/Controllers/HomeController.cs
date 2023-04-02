@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Wed_ShopGaming.Models;
 using Wed_ShopGaming.ViewModels;
-using Wed_ShopGaming.DTO;
 using PagedList;
 using Wed_ShopGaming.Models.Entity;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace Wed_ShopGaming.Controllers
         }
         public ActionResult Index()
         {
-            /*PagingSPViewModel model = new PagingSPViewModel();
+            PagingSPViewModel model = new PagingSPViewModel();
             HinhAnhMainViewModel hinhAnhMain = null;
             List<HinhAnhMainViewModel> LapTop = new List<HinhAnhMainViewModel>();
             List<HinhAnhMainViewModel> MayTinh = new List<HinhAnhMainViewModel>();
@@ -92,8 +91,12 @@ namespace Wed_ShopGaming.Controllers
                     hinhAnhMain.sanPham = item;
                     LinhKien.Add(hinhAnhMain);
                 }
-            }*/
-            return View();
+            }
+            model.LapTop = LapTop.ToPagedList((int)model.page, model.pageSize);
+            model.MayTinh = MayTinh.ToPagedList((int)model.page, model.pageSize);
+            model.DanhChoBan = DanhChoBan.ToPagedList((int)model.page, model.pageSize);
+            model.LinhKien = LinhKien.ToPagedList((int)model.page, model.pageSize);
+            return View(model);
         }
     }
 }

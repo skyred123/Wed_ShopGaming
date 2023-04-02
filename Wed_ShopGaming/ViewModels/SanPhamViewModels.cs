@@ -73,9 +73,9 @@ namespace Wed_ShopGaming.ViewModels
         public int? page { get; set; } 
         public int totalPage { get; set; }
 
-        public IPagedList<MayTinh> LapTop { get; set; }
-        public IPagedList<MayTinh> MayTinh { get; set; }
-        public IPagedList<LinhKien> LinhKien { get;set; }
-        public IPagedList<MayTinh> DanhChoBan { get; set; }
+        public IPagedList<HinhAnhMainViewModel> LapTop { get; set; }
+        public IPagedList<HinhAnhMainViewModel> MayTinh { get; set; }
+        public IPagedList<HinhAnhMainViewModel> LinhKien { get;set; }
+        public IPagedList<HinhAnhMainViewModel> DanhChoBan { get; set; }
     }
 }
