@@ -5,6 +5,7 @@ using Wed_ShopGaming.ViewModels;
 using Wed_ShopGaming.DTO;
 using PagedList;
 using Wed_ShopGaming.Models.Entity;
+using System.Collections.Generic;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -20,30 +21,79 @@ namespace Wed_ShopGaming.Controllers
         }
         public ActionResult Index()
         {
-            PagingSPViewModel model = new PagingSPViewModel();
-            if (PageDTO.paging == null)
+            /*PagingSPViewModel model = new PagingSPViewModel();
+            HinhAnhMainViewModel hinhAnhMain = null;
+            List<HinhAnhMainViewModel> LapTop = new List<HinhAnhMainViewModel>();
+            List<HinhAnhMainViewModel> MayTinh = new List<HinhAnhMainViewModel>();
+            List<HinhAnhMainViewModel> DanhChoBan = new List<HinhAnhMainViewModel>();
+            List<HinhAnhMainViewModel> LinhKien = new List<HinhAnhMainViewModel>();
+            if (model.totalPage == 0)
             {
-                model = new PagingSPViewModel();
-                if (model.page == 0) model.page = 1;
-                model.pageSize = 9;
+                if (model.page == 0 || model.page == null) model.page = 1;
+                model.pageSize = 2;
                 if (model.pageSize == 0) { model.pageSize = 1; }
                 model.pageNumber = (model.page ?? 1);
-                if (model.totalPage ==0)
+                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == true))
                 {
-                    model.LapTop = context.MayTinhs.Where(e => e.LoaiMT.Name.Contains("LapTop") == true).ToList();
-                    model.MayTinh = context.MayTinhs.Where(e => e.LoaiMT.Name.Contains("MayTinh") == true).ToList();
-                    model.DanhChoBan = context.MayTinhs.Where(e => e.LoaiMT.Name.Contains("LapTop") == false && e.LoaiMT.Name.Contains("MayTinh") == false).ToList();
-                    model.LinhKien = context.LinhKiens.ToList();
+                    hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item;
+                    LapTop.Add(hinhAnhMain);
                 }
-            }
-            return View(model);
-
+                MayTinh = new List<HinhAnhMainViewModel>();
+                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
+                {
+                    hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item;
+                    MayTinh.Add(hinhAnhMain);
+                }
+                DanhChoBan = new List<HinhAnhMainViewModel>();
+                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false && e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
+                {
+                    hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item;
+                    DanhChoBan.Add(hinhAnhMain);
+                }
+                LinhKien = new List<HinhAnhMainViewModel>();
+                foreach (var item in context.SanPhams.ToList())
+                {
+                    hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item;
+                    LinhKien.Add(hinhAnhMain);
+                }
+            }*/
+            return View();
         }
-        /*[HttpPost]
-        public ActionResult LapTop_Partial(int? page)
-        {
-
-            return RedirectToAction("Index", "Home", new {id = 9999});
-        }*/
     }
 }

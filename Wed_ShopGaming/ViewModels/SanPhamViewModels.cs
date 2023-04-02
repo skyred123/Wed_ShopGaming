@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -72,9 +73,9 @@ namespace Wed_ShopGaming.ViewModels
         public int? page { get; set; } 
         public int totalPage { get; set; }
 
-        public List<MayTinh> LapTop { get; set; }
-        public List<MayTinh> MayTinh { get; set; }
-        public List<LinhKien> LinhKien { get;set; }
-        public List<MayTinh> DanhChoBan { get; set; }
+        public IPagedList<MayTinh> LapTop { get; set; }
+        public IPagedList<MayTinh> MayTinh { get; set; }
+        public IPagedList<LinhKien> LinhKien { get;set; }
+        public IPagedList<MayTinh> DanhChoBan { get; set; }
     }
 }

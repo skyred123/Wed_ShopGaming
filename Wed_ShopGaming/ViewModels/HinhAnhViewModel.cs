@@ -12,10 +12,16 @@ namespace Wed_ShopGaming.ViewModels
     {
         public string Id { get; set; }
         public string IDSanPham { get; set; }
+        public string Img { get; set; }
         public bool IsCheck { get; set; }
     }
     public class ListHinhAnhViewModel
     {
         public List<HinhAnhViewModel>HinhAnhs { get; set; }
+    }
+    public class HinhAnhMainViewModel
+    {
+        public SanPham sanPham { get; set; }
+        public string img { get; set; }
     }
 }

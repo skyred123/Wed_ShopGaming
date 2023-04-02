@@ -74,7 +74,14 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                     HinhAnh hinhAnh = new HinhAnh();
                     hinhAnh.IDSanPham = idSanPham;
                     hinhAnh.Id = Guid.NewGuid().ToString();
-                    //hinhAnh.Img = data;
+
+                    string fileName = Path.GetFileNameWithoutExtension(fileBase.FileName);
+                    string extention = Path.GetExtension(fileBase.FileName);
+                    fileName = fileName + extention;
+                    hinhAnh.Img = "~/Contents_Custom/SaveImage/" + fileName;
+                
+                    fileBase.SaveAs(Path.Combine(Server.MapPath("~/Contents_Custom/SaveImage/"), fileName));
+
                     hinhAnh.STT = i;
                     i++;
                     context.HinhAnhs.Add(hinhAnh);
