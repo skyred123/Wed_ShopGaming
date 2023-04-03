@@ -1,71 +1,184 @@
 ﻿@model Wed_ShopGaming.ViewModels.PagingSPViewModel
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     //var ViewModel = Wed_ShopGaming.DTO.PageDTO.paging;
 }
 
-<div>
-    <div class="p-3 ">
-        <h3 class="">LapTop</h3>
-    </div>
-    <div>
-        <div class="col-lg-9 col-md-8">
-            <div class="row pb-3">
-                @foreach (var item in Model.LapTop)
-                {
-
-
-                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div class="product-item bg-light mb-4">
-                            <div class="product-img position-relative overflow-hidden">
-                                @if (item.img == "")
-                                {
-                                    <img width="250" height="250" src="" />
-                                }
-                                else
-                                {
-                                    <img width="250" height="250" src="@Url.Content(item.img)" />
-                                }
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
+@if (Model.LapTop.PageCount != 0)
+{
+    <div class="container-fluid pt-5 pb-3 bg-light">
+        @*<div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">LapTop</span><a class="btn-link" href="~/Home/DanhSachSPCheck/?check=1">Xem tat ca</a> </div>*@
+        <div class="h2 section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="bg-secondary pr-3">LapTop</span><a class=" bg-secondary pr-3 " href="~/Home/DanhSachSPCheck/?check=1">Xem tat ca</a></div>
+        <div class="row px-xl-5 d-flex">
+            @foreach (var item in Model.LapTop)
+            {
+                <div class="col-lg-3 col-md-5 col-sm-5 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="~/Contents_Custom/SaveImage/@item.img" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="~/Home/ChiTietSP/@item.sanPham.Id"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                             </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">@item.sanPham.Name</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>@item.sanPham.Price</h5>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">@item.sanPham.Name</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>@item.sanPham.Price</h5><h6 class="text-muted ml-2"></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
                             </div>
                         </div>
                     </div>
-                }
-                <!-- Shop Product End -->
-            </div>
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            Trang @(Model.LapTop.PageCount < Model.LapTop.PageNumber ? 0 : Model.LapTop.PageNumber) / @Model.LapTop.PageCount
+
+            @Html.PagedListPager(Model.LapTop, page => Url.Action("PageList", "Home", new { page, check = 1 }))
         </div>
     </div>
-    <div class="p-3 ">
-        <h3 class="">May Tinh</h3>
-    </div>
-    <div>
+}
+@if (Model.MayTinh.PageCount != 0)
+{
+    <div class="m-3"></div>
+    <div class="container-fluid pt-5 pb-3 bg-light">
+        <div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">May Tinh</span><a class="bg-secondary pr-3" href="~/Home/DanhSachSPCheck/?check=2">Xem tat ca</a> </div>
+        <div class="row px-xl-5">
+            @foreach (var item in Model.MayTinh)
+            {
+                <div class="col-lg-3 col-md-5 col-sm-5 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="~/Contents_Custom/SaveImage/@item.img" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="~/Home/ChiTietSP/@item.sanPham.Id"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">@item.sanPham.Name</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>@item.sanPham.Price</h5><h6 class="text-muted ml-2"></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center ">
+            Trang @(Model.MayTinh.PageCount < Model.MayTinh.PageNumber ? 0 : Model.MayTinh.PageNumber) / @Model.MayTinh.PageCount
 
+            @Html.PagedListPager(Model.MayTinh, page => Url.Action("PageList", "Home", new { page, check = 1 }))
+        </div>
     </div>
-    <div class="p-3 ">
-        <h3 class="">Linh Kien</h3>
-    </div>
-    <div>
+}
+@if (Model.LinhKien.PageCount != 0)
+{
+    <div class="m-3"></div>
+    <div class="container-fluid pt-5 pb-3 bg-light">
+        <div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">Linh Kien</span><a class="bg-secondary pr-3" href="~/Home/DanhSachSPCheck/?check=4">Xem tat ca</a> </div>
+        <div class="row px-xl-5">
+            @foreach (var item in Model.LinhKien)
+            {
+                <div class="col-lg-3 col-md-5 col-sm-5 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="~/Contents_Custom/SaveImage/@item.img" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="~/Home/ChiTietSP/@item.sanPham.Id"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">@item.sanPham.Name</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>@item.sanPham.Price</h5><h6 class="text-muted ml-2"></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            Trang @(Model.LinhKien.PageCount < Model.LinhKien.PageNumber ? 0 : Model.LinhKien.PageNumber) / @Model.LinhKien.PageCount
 
+            @Html.PagedListPager(Model.LinhKien, page => Url.Action("PageList", "Home", new { page, check = 1 }))
+        </div>
     </div>
-</div>
+}
+@if (Model.DanhChoBan.PageCount != 0)
+{
+    <div class="m-3"></div>
+    <div class="container-fluid pt-5 pb-3 bg-light">
+        <div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">Danh Cho Ban</span><a class="bg-secondary pr-3" href="~/Home/DanhSachSPCheck/?check=3">Xem tat ca</a> </div>
+        <div class="row px-xl-5">
+            @foreach (var item in Model.DanhChoBan)
+            {
+                <div class="col-lg-3 col-md-5 col-sm-5 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-75" src="~/Contents_Custom/SaveImage/@item.img" alt="">
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="~/Home/ChiTietSP/@item.sanPham.Id"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>W
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="">@item.sanPham.Name</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>@item.sanPham.Price</h5><h6 class="text-muted ml-2"></h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small>(99)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center">
+            Trang @(Model.DanhChoBan.PageCount < Model.DanhChoBan.PageNumber ? 0 : Model.DanhChoBan.PageNumber) / @Model.DanhChoBan.PageCount
+            @Html.PagedListPager(Model.DanhChoBan, page => Url.Action("PageList", "Home", new { page, check = 1 }))
+        </div>
+    </div>
+}
 

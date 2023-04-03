@@ -103,14 +103,14 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 }
                     
             }
-            TempData["AddCT_LinhKien"] = model;
+            Session["AddCT_LinhKien"] = model;
             ViewBag.MayTinh = context.SanPhams.ToList().FirstOrDefault(e => e.Id == id);
             return View(model);
         }
         [HttpPost]
         public ActionResult Details_MayTinh(ListDetails_MayTinhViewModel model,string idSanPham)
         {
-            var listCT_LinhKien = (ListDetails_MayTinhViewModel)TempData["AddCT_LinhKien"];
+            var listCT_LinhKien = Session["AddCT_LinhKien"] as ListDetails_MayTinhViewModel;
             for (int i=0;i< model.Details_MayTinh.Count();i++)
             {
                 if (model.Details_MayTinh[i].IsCheck != listCT_LinhKien.Details_MayTinh[i].IsCheck)
@@ -121,7 +121,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                         context.CT_LinhKiens.Remove(cT_LinhKien);
                         context.SaveChanges();
                     }
-                    else if (model.Details_MayTinh[i].IsCheck == false)
+                    else if (model.Details_MayTinh[i].IsCheck == true)
                     {
                         var ct_LinhKien = new CT_LinhKien();
                         ct_LinhKien.id = Guid.NewGuid().ToString();
