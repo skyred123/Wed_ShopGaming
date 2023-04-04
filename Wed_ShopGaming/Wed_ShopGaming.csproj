@@ -595,6 +595,9 @@
     <Content Include="Views\Home\ChiTietSP.cshtml" />
     <Content Include="Views\Home\ListGioHang.cshtml" />
     <Content Include="Views\Home\CheckOut.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

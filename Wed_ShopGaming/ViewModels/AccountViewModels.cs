@@ -9,6 +9,10 @@ namespace Wed_ShopGaming.ViewModels
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "DefaultUserName")]
+        public string DefaultUserName { get; set; }
     }
 
     public class ExternalLoginListViewModel

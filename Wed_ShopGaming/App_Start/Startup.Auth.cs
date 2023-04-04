@@ -60,9 +60,9 @@ namespace Wed_ShopGaming
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1367404713828629",
+               appSecret: "4d4bc0cd884e16e625a2da49ac3b005c");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
