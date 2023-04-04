@@ -22,6 +22,8 @@ namespace Wed_ShopGaming.Models.Entity
 
         public virtual ICollection<HinhAnh> HinhAnhs { get; set; }
 
+        public virtual ICollection<GioHang> GioHangs { get; set; }
+
         public virtual LinhKien LinhKien { get; set; }
 
         public virtual MayTinh MayTinh { get; set; }

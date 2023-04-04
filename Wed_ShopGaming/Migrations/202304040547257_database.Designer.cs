@@ -7,13 +7,13 @@ namespace Wed_ShopGaming.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class adddb : IMigrationMetadata
+    public sealed partial class database : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(adddb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(database));
         
         string IMigrationMetadata.Id
         {
-            get { return "202303300843229_adddb"; }
+            get { return "202304040547257_database"; }
         }
         
         string IMigrationMetadata.Source

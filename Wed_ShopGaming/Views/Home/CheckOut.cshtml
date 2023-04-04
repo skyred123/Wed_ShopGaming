@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Wed_ShopGaming.ViewModels.HinhAnhMainViewModel>
+@{
     ViewBag.Title = "CheckOut";
     Wed_ShopGaming.Models.ApplicationUser user = ViewBag.User;
 }
@@ -59,10 +60,15 @@
             <div class="bg-light p-30 mb-5">
                 <div class="border-bottom">
                     <h6 class="mb-3">Products</h6>
-                    <div class="d-flex justify-content-between">
-                        <p>Product Name 1</p>
-                        <p>$150</p>
-                    </div>
+                    @foreach (var item in Model)
+                    {
+                        <div class="d-flex justify-content-between">
+                            <p>@item.sanPham.Name</p>
+                            <p>@item.sanPham.Price</p>
+                            <p>@item.count</p>
+                            <p>@String.Format("{0:0,0}", item.sanPham.Price * item.count)</p>
+                        </div>
+                    }
                 </div>
                 <div class="pt-2">
                     <div class="d-flex justify-content-between mt-2">

@@ -70,6 +70,17 @@ namespace Wed_ShopGaming.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Phone Number Required!")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Entered phone format is not valid.")]
+        public string Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

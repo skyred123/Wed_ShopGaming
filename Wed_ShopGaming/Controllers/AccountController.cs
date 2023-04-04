@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -11,6 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Wed_ShopGaming.Models;
+using Wed_ShopGaming.Models.Entity;
 using Wed_ShopGaming.ViewModels;
 
 namespace Wed_ShopGaming.Controllers
@@ -118,6 +120,25 @@ namespace Wed_ShopGaming.Controllers
                 }
                 else if (userManager.IsInRole(user.Id, "Customer"))
                 {
+                    var giohang = CheckGiohang();
+                    if (giohang != null)
+                    {
+                        foreach(var item in giohang)
+                        {
+                            var temp = new GioHang()
+                            {
+                                SanPhamId = item.sanPham.Id,
+                                UserId =user.Id,
+                                Count = item.count,
+                            };
+                            _dbContext.gioHangs.Add(temp);
+                            _dbContext.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -130,6 +151,14 @@ namespace Wed_ShopGaming.Controllers
                 ModelState.AddModelError("Add Error", "Error");
                 return View(model);
             }
+        }
+        public List<GioHangViewModel> CheckGiohang()
+        {
+            if (Session["GioHang"]==null)
+            {
+                return null;
+            }
+            return (Session["GioHang"] as List<GioHangViewModel>);
         }
         public ActionResult Logout()
         {

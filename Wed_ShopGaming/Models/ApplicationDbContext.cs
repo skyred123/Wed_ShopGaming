@@ -71,6 +71,15 @@ namespace Wed_ShopGaming.Models
                 .WithOptional(e => e.TSKT)
                 .HasForeignKey(e => e.IdTSKT);
 
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(e => e.GioHangs)
+                .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<SanPham>()
+                .HasMany(e=>e.GioHangs)
+                .WithRequired(e=>e.SanPham) 
+                .WillCascadeOnDelete(false);
+
 
         }
         public static ApplicationDbContext Create()
@@ -85,7 +94,8 @@ namespace Wed_ShopGaming.Models
             dbContext.LoaiLKs.Include(e => e.LinhKiens).Load();
             dbContext.LoaiMTs.Include(e => e.MayTinh).Load();
             dbContext.MayTinhs.Include(e => e.SanPham).Include(e => e.CauHinh).Include(e => e.LoaiMT).Include(e=>e.CT_LinhKiens).Load();
-            dbContext.SanPhams.Include(e => e.MayTinh).Include(e => e.LinhKien).Include(e => e.HinhAnhs).Include(e => e.Hang).Load();
+            dbContext.SanPhams.Include(e => e.MayTinh).Include(e => e.LinhKien).Include(e => e.HinhAnhs).Include(e => e.Hang).Include(e => e.GioHangs).Load();
+            dbContext.gioHangs.Include(e => e.SanPham).Include(e => e.User).Load();
             dbContext.TSKTs.Include(e => e.CT_TSKTs).Load();
             return dbContext;
         }
@@ -100,5 +110,6 @@ namespace Wed_ShopGaming.Models
         public DbSet<HinhAnh> HinhAnhs { get;set; }
         public DbSet<CT_TSKT> CT_TSKTs { get; set; }
         public DbSet<CT_LinhKien> CT_LinhKiens { get; set; }
+        public DbSet<GioHang> gioHangs { get; set; }
     }
 }

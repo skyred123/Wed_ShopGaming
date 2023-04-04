@@ -7,6 +7,7 @@ using Wed_ShopGaming.Models.Entity;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -36,52 +37,7 @@ namespace Wed_ShopGaming.Controllers
             model.pageNumber = (model.page ?? 1);
             foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == true))
             {
-                hinhAnhMain = new HinhAnhMainViewModel();
-                if (item.HinhAnhs.Count() != 0)
-                {
-                    hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
-                }
-                else
-                {
-                    hinhAnhMain.img = "";
-                }
-                hinhAnhMain.sanPham = item;
-                LapTop.Add(hinhAnhMain);
-            }
-            MayTinh = new List<HinhAnhMainViewModel>();
-            foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
-            {
-                hinhAnhMain = new HinhAnhMainViewModel();
-                if (item.HinhAnhs.Count() != 0)
-                {
-                    hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
-                }
-                else
-                {
-                    hinhAnhMain.img = "";
-                }
-                hinhAnhMain.sanPham = item;
-                MayTinh.Add(hinhAnhMain);
-            }
-            DanhChoBan = new List<HinhAnhMainViewModel>();
-            foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false && e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
-            {
-                hinhAnhMain = new HinhAnhMainViewModel();
-                if (item.HinhAnhs.Count() != 0)
-                {
-                    hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
-                }
-                else
-                {
-                    hinhAnhMain.img = "";
-                }
-                hinhAnhMain.sanPham = item;
-                DanhChoBan.Add(hinhAnhMain);
-            }
-            LinhKien = new List<HinhAnhMainViewModel>();
-            foreach (var item in context.SanPhams.ToList())
-            {
-                if (item.LinhKien != null)
+                if (item.Amount != 0)
                 {
                     hinhAnhMain = new HinhAnhMainViewModel();
                     if (item.HinhAnhs.Count() != 0)
@@ -93,7 +49,67 @@ namespace Wed_ShopGaming.Controllers
                         hinhAnhMain.img = "";
                     }
                     hinhAnhMain.sanPham = item;
-                    LinhKien.Add(hinhAnhMain);
+                    LapTop.Add(hinhAnhMain);
+                }
+            }
+            MayTinh = new List<HinhAnhMainViewModel>();
+            foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
+            {
+                if (item.Amount != 0)
+                {
+                    hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item;
+                    MayTinh.Add(hinhAnhMain);
+                }
+                    
+            }
+            DanhChoBan = new List<HinhAnhMainViewModel>();
+            foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false && e.MayTinh.LoaiMT.Name.Contains("MayTinh") == false))
+            {
+                if (item.Amount != 0)
+                {
+                    hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item;
+                    DanhChoBan.Add(hinhAnhMain);
+                }
+                    
+            }
+            LinhKien = new List<HinhAnhMainViewModel>();
+            foreach (var item in context.SanPhams.ToList())
+            {
+                if (item.LinhKien != null)
+                {
+                    if (item.Amount != 0)
+                    {
+                        hinhAnhMain = new HinhAnhMainViewModel();
+                        if (item.HinhAnhs.Count() != 0)
+                        {
+                            hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                        }
+                        else
+                        {
+                            hinhAnhMain.img = "";
+                        }
+                        hinhAnhMain.sanPham = item;
+                        LinhKien.Add(hinhAnhMain);
+                    }
+                       
                 }
             }
 
@@ -186,7 +202,7 @@ namespace Wed_ShopGaming.Controllers
             }
             if (check == 3)
             {
-                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false && e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
+                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false || e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
                 {
                     HinhAnhMainViewModel hinhAnhMain = new HinhAnhMainViewModel();
                     if (item.HinhAnhs.Count() != 0)
@@ -248,40 +264,99 @@ namespace Wed_ShopGaming.Controllers
         }
         public ActionResult AddGioHang(string id,string strURL)
         {
-            if (Session["GioHang"] == null)
+            if (User.Identity.IsAuthenticated)
             {
-                Session["GioHang"] = new List<GioHang>();
-                var sanPham = context.SanPhams.FirstOrDefault(e => e.Id == id);
-                GioHang item = new GioHang() {
-                    sanPham = sanPham,
-                    count = 1,
+                var userid = User.Identity.GetUserId();
+                var check = context.gioHangs.Where(e => e.UserId == userid);
+                var sanPham = new SanPham();
+                var giohang = new GioHang()
+                {
+                    UserId = User.Identity.GetUserId(),
                 };
-                (Session["GioHang"] as List<GioHang>).Add(item);
-            }
-            else
-            {
-                GioHang item = (Session["GioHang"] as List<GioHang>).FirstOrDefault(e=>e.sanPham.Id == id);
-                if(item != null)
+                if (check == null)
                 {
-                    item.count++;
-                }
-                else
-                {
-                    var sanPham = context.SanPhams.FirstOrDefault(e => e.Id == id);
-                    GioHang giohang = new GioHang()
+                    Session["GioHang"] = new List<GioHangViewModel>();
+                    sanPham = context.SanPhams.FirstOrDefault(e => e.Id == id);
+                    GioHangViewModel item = new GioHangViewModel()
                     {
                         sanPham = sanPham,
                         count = 1,
                     };
-                    (Session["GioHang"] as List<GioHang>).Add(giohang);
+                    giohang.Count = item.count;
+                    (Session["GioHang"] as List<GioHangViewModel>).Add(item);
+                }
+                else if (check != null)
+                {
+                    List<GioHangViewModel> gioHangViewModel = new List<GioHangViewModel>();
+                    foreach (var item in check)
+                    {
+                        GioHangViewModel temp = new GioHangViewModel()
+                        {
+                            sanPham = item.SanPham,
+                            count = item.Count,
+                        };
+                    }
+                    Session["GioHang"] = gioHangViewModel;
+
+                    GioHangViewModel item1 = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
+                    if (item1 != null)
+                    {
+                        item1.count++;
+                        giohang.Count++;
+                    }
+                    else
+                    {
+                        sanPham = context.SanPhams.FirstOrDefault(e => e.Id == id);
+                        GioHangViewModel temp = new GioHangViewModel()
+                        {
+                            sanPham = sanPham,
+                            count = 1,
+                        };
+                        giohang.Count= temp.count;
+                        (Session["GioHang"] as List<GioHangViewModel>).Add(temp);
+                    }
+                }
+                giohang.SanPhamId = sanPham.Id;
+                context.gioHangs.Add(giohang);
+                context.SaveChanges();
+            }
+            else
+            {
+                if (Session["GioHang"] == null)
+                {
+                    Session["GioHang"] = new List<GioHangViewModel>();
+                    var sanPham = context.SanPhams.FirstOrDefault(e => e.Id == id);
+                    GioHangViewModel item = new GioHangViewModel()
+                    {
+                        sanPham = sanPham,
+                        count = 1,
+                    };
+                    (Session["GioHang"] as List<GioHangViewModel>).Add(item);
+                }
+                else
+                {
+                    GioHangViewModel item = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
+                    if (item != null)
+                    {
+                        item.count++;
+                    }
+                    else
+                    {
+                        var sanPham = context.SanPhams.FirstOrDefault(e => e.Id == id);
+                        GioHangViewModel giohang = new GioHangViewModel()
+                        {
+                            sanPham = sanPham,
+                            count = 1,
+                        };
+                        (Session["GioHang"] as List<GioHangViewModel>).Add(giohang);
+                    }
                 }
             }
             return Redirect(strURL);
-            
         }
         public double TongTienGioHang()
         {
-            var gioHangs = Session["GioHang"] as List<GioHang>;
+            var gioHangs = Session["GioHang"] as List<GioHangViewModel>;
             double result = 0;
             if (gioHangs != null)
             {
@@ -294,7 +369,11 @@ namespace Wed_ShopGaming.Controllers
         }
         public ActionResult ListGioHang()
         {
-            var gioHangs = Session["GioHang"] as List<GioHang>;
+            if (User.Identity.IsAuthenticated)
+            {
+                Session["GioHang"] = context.gioHangs.Where(e => e.UserId == User.Identity.GetUserId());
+            }
+            var gioHangs = Session["GioHang"] as List<GioHangViewModel>;
             ViewBag.TongTien = TongTienGioHang();
             List<HinhAnhMainViewModel> model = new List<HinhAnhMainViewModel>();
             if (gioHangs == null)
@@ -315,7 +394,7 @@ namespace Wed_ShopGaming.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var gioHangs = Session["GioHang"] as List<GioHang>;
+                var gioHangs = Session["GioHang"] as List<GioHangViewModel>;
                 ViewBag.TongTien = TongTienGioHang();
                 var userid = User.Identity.GetUserId();
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
