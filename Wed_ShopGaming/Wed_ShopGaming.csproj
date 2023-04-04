@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202304020058359_img.designer.cs">
       <DependentUpon>202304020058359_img.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304040407456_db.cs" />
+    <Compile Include="Migrations\202304040407456_db.designer.cs">
+      <DependentUpon>202304040407456_db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity\CauHinh.cs" />
     <Compile Include="Models\Entity\CT_LinhKien.cs" />
@@ -239,6 +243,7 @@
     <Content Include="Contents_Custom\css\bootstrap-reboot.min.css" />
     <Content Include="Contents_Custom\css\bootstrap.css" />
     <Content Include="Contents_Custom\css\bootstrap.min.css" />
+    <Content Include="Contents_Custom\css\PagedList.css" />
     <Content Include="Contents_Custom\css\style.css" />
     <Content Include="Contents_Custom\css\style.min.css" />
     <Content Include="Contents_Custom\img\banphim\Bàn Phím Bluetooth Logitech K380 Blue.png" />
@@ -592,6 +597,10 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\DanhSachSP.cshtml" />
+    <Content Include="Views\Home\ChiTietSP.cshtml" />
+    <Content Include="Views\Home\ListGioHang.cshtml" />
+    <Content Include="Views\Home\CheckOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -609,6 +618,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304020058359_img.resx">
       <DependentUpon>202304020058359_img.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304040407456_db.resx">
+      <DependentUpon>202304040407456_db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -118,11 +118,11 @@ namespace Wed_ShopGaming.Controllers
                 }
                 else if (userManager.IsInRole(user.Id, "Customer"))
                 {
-                    return RedirectToAction("Index", "Home", new { area = "Customer" });
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home", new { area = "Customer" });
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else

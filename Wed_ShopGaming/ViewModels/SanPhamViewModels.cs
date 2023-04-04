@@ -78,4 +78,9 @@ namespace Wed_ShopGaming.ViewModels
         public IPagedList<HinhAnhMainViewModel> LinhKien { get;set; }
         public IPagedList<HinhAnhMainViewModel> DanhChoBan { get; set; }
     }
+    public class GioHang
+    {
+        public SanPham sanPham { get; set; }
+        public int count { get; set; }
+    }
 }

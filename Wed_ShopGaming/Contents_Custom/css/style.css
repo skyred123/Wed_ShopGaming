@@ -9710,3 +9710,13 @@ a.text-dark:hover, a.text-dark:focus {
     transform: translateY(-15px);
   }
 }
+.text-f {
+    justify-content: space-between;
+}
+
+.scroll-table {
+    overflow-x: scroll;
+}
+.background -img{
+    background:url()
+}

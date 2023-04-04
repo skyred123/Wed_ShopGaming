@@ -23,5 +23,6 @@ namespace Wed_ShopGaming.ViewModels
     {
         public SanPham sanPham { get; set; }
         public string img { get; set; }
+        public int count { get; set; }
     }
 }
