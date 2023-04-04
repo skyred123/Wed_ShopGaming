@@ -45,25 +45,21 @@
             </table>
         </div>
         <div class="col-lg-4">
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Thanh Toan</span></h5>
             <div class="bg-light p-30 mb-5">
                 <div class="border-bottom pb-2">
                     <div class="d-flex justify-content-between mb-3">
-                        <h6>Subtotal</h6>
-                        <h6>$150</h6>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Shipping</h6>
-                        <h6 class="font-weight-medium">$10</h6>
+                        <h6>Tong Tam Tinh</h6>
+                        <h6>@String.Format("{0:0,0}", ViewBag.TongTien)đ</h6>
                     </div>
                 </div>
                 <div class="pt-2">
                     <div class="d-flex justify-content-between mt-2">
-                        <h5>Total</h5>
-                        <h5>$160</h5>
+                        <h5>Thanh Tien</h5>
+                        <h5>@String.Format("{0:0,0}", ViewBag.TongTien)đ</h5>
                     </div>
-                    <a href="~/Shop/Checkout">
-                        <input type="button" class="btn btn-block btn-primary font-weight-bold my-3 py-3" value="Proceed To Checkout" />
+                    <a href="~/Home/Checkout">
+                        <input type="button" class="btn btn-block btn-primary font-weight-bold my-3 py-3" value="Thanh Toan" />
                     </a>
                 </div>
             </div>

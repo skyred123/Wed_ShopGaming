@@ -5,6 +5,8 @@ using Wed_ShopGaming.ViewModels;
 using PagedList;
 using Wed_ShopGaming.Models.Entity;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -277,10 +279,23 @@ namespace Wed_ShopGaming.Controllers
             return Redirect(strURL);
             
         }
+        public double TongTienGioHang()
+        {
+            var gioHangs = Session["GioHang"] as List<GioHang>;
+            double result = 0;
+            if (gioHangs != null)
+            {
+                foreach (var item in gioHangs)
+                {
+                    result = item.sanPham.Price * item.count;
+                }
+            }
+            return result;
+        }
         public ActionResult ListGioHang()
         {
             var gioHangs = Session["GioHang"] as List<GioHang>;
-            
+            ViewBag.TongTien = TongTienGioHang();
             List<HinhAnhMainViewModel> model = new List<HinhAnhMainViewModel>();
             if (gioHangs == null)
             {
@@ -294,8 +309,33 @@ namespace Wed_ShopGaming.Controllers
                 temp.count = item.count;
                 model.Add(temp);
             }
-
             return View(model);
+        }
+        public ActionResult CheckOut()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var gioHangs = Session["GioHang"] as List<GioHang>;
+                ViewBag.TongTien = TongTienGioHang();
+                var userid = User.Identity.GetUserId();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                ViewBag.User = userManager.FindById(userid);
+                List<HinhAnhMainViewModel> model = new List<HinhAnhMainViewModel>();
+                if (gioHangs == null)
+                {
+                    return View(model);
+                }
+                foreach (var item in gioHangs)
+                {
+                    HinhAnhMainViewModel temp = new HinhAnhMainViewModel();
+                    temp.sanPham = item.sanPham;
+                    temp.img = item.sanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    temp.count = item.count;
+                    model.Add(temp);
+                }
+                return View(model);
+            }
+            return RedirectToAction("Login", "Account");
         }
         public ActionResult PageList(int page, int check) {
             Session["page"]  = page;

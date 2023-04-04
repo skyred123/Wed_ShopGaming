@@ -3,14 +3,12 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //var ViewModel = Wed_ShopGaming.DTO.PageDTO.paging;
 }
 
 @if (Model.LapTop.PageCount != 0)
 {
     <div class="container-fluid pt-5 pb-3 bg-light">
-        @*<div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">LapTop</span><a class="btn-link" href="~/Home/DanhSachSPCheck/?check=1">Xem tat ca</a> </div>*@
-        <div class="h2 section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="bg-secondary pr-3">LapTop</span><a class=" bg-secondary pr-3 " href="~/Home/DanhSachSPCheck/?check=1">Xem tat ca</a></div>
+        <h2 class="bg-light section-title position-relative text-uppercase mx-xl-5 mb-4 row  bg-light"><span class=" pr-3 col-md-9">LapTop</span><span class=" pr-3 col-md-3"><a class="text-right" href="~/Home/DanhSachSPCheck/?check=1">Xem tat ca</a></span></h2>
         <div class="row px-xl-5 d-flex">
             @foreach (var item in Model.LapTop)
             {
@@ -54,7 +52,7 @@
 {
     <div class="m-3"></div>
     <div class="container-fluid pt-5 pb-3 bg-light">
-        <div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">May Tinh</span><a class="bg-secondary pr-3" href="~/Home/DanhSachSPCheck/?check=2">Xem tat ca</a> </div>
+        <h2 class="bg-light section-title position-relative text-uppercase mx-xl-5 mb-4 row  bg-light"><span class=" pr-3 col-md-9">May Tinh</span><span class=" pr-3 col-md-3"><a class="text-right" href="~/Home/DanhSachSPCheck/?check=2">Xem tat ca</a></span></h2>
         <div class="row px-xl-5">
             @foreach (var item in Model.MayTinh)
             {
@@ -98,7 +96,7 @@
 {
     <div class="m-3"></div>
     <div class="container-fluid pt-5 pb-3 bg-light">
-        <div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">Linh Kien</span><a class="bg-secondary pr-3" href="~/Home/DanhSachSPCheck/?check=4">Xem tat ca</a> </div>
+        <h2 class="bg-light section-title position-relative text-uppercase mx-xl-5 mb-4 row  bg-light"><span class=" pr-3 col-md-9">Linh Kien</span><span class=" pr-3 col-md-3"><a class="text-right" href="~/Home/DanhSachSPCheck/?check=4">Xem tat ca</a></span></h2>
         <div class="row px-xl-5">
             @foreach (var item in Model.LinhKien)
             {
@@ -142,7 +140,7 @@
 {
     <div class="m-3"></div>
     <div class="container-fluid pt-5 pb-3 bg-light">
-        <div class="section-title position-relative text-uppercase mx-xl-5 mb-4 text-f"><span class="">Danh Cho Ban</span><a class="bg-secondary pr-3" href="~/Home/DanhSachSPCheck/?check=3">Xem tat ca</a> </div>
+        <h2 class="bg-light section-title position-relative text-uppercase mx-xl-5 mb-4 row bg-light"><span class=" pr-3 col-md-9">Danh Cho Ban</span><span class=" pr-3 col-md-3"><a class="text-right" href="~/Home/DanhSachSPCheck/?check=3">Xem tat ca</a></span></h2>
         <div class="row px-xl-5">
             @foreach (var item in Model.DanhChoBan)
             {

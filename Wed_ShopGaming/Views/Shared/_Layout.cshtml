@@ -30,6 +30,15 @@
         Wed_ShopGaming.Models.ApplicationDbContext context = Wed_ShopGaming.Models.ApplicationDbContext.Create();
         var ListMT = context.LoaiMTs.ToList();
         var ListLK = context.LoaiLKs.ToList();
+        int count;
+        if (Session["GioHang"] ==null)
+        {
+            count = 0;
+        }
+        else
+        {
+            count = (Session["GioHang"] as List<Wed_ShopGaming.ViewModels.GioHang>).Count();
+        }
     }
 
 
@@ -111,7 +120,7 @@
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                                 <a href="~/Home/ListGioHang" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">@count</span>
                                 </a>
                             </div>
                             <div class="btn-group ml-3">
