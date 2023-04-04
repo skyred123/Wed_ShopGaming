@@ -2,9 +2,10 @@
 @{
     ViewBag.Title = "CauHinhSP";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var action = (Session["ManagerAction"] as Wed_ShopGaming.ViewModels.ManagerViewModel);
 }
 
-@using (Html.BeginForm("Create_MayTinh", "MayTinh", new { area = "Admin" }, FormMethod.Post))
+@using (Html.BeginForm(action.Action, "MayTinh", new { area = "Admin" }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row p-2">
@@ -58,6 +59,9 @@
                                 @Html.ActionLink("Chi Tiet", "Details_MayTinh", new { id = item.Id })
                             </td>
                             <td>
+                                @Html.ActionLink("Edit", "Edit_MayTinh", new { id = item.Id })
+                            </td>
+                            <td>
                                 @Html.ActionLink("Delete", "Delete_LinhKien", new { id = item.Id })
                             </td>
                         </tr>
@@ -70,6 +74,7 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <tr>
                     <th>
+                        @Html.HiddenFor(model=>model.id)
                         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
                     </th>
                 </tr>
@@ -118,7 +123,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" value="Create" class="btn btn-default text-black" />
+                        <input type="submit" value="@action.Heading" class="btn btn-default text-black" />
                     </td>
                 </tr>
             </table>

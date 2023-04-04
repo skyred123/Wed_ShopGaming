@@ -36,6 +36,30 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 }
             }
             model.SanPham = sanPhams;
+            if(Session["ManagerAction"] != null && (Session["ManagerAction"] as ManagerViewModel).SanPhamId != null)
+            {
+                var sanphamId = (Session["ManagerAction"] as ManagerViewModel).SanPhamId;
+                var mt = context.SanPhams.FirstOrDefault(e => e.Id == sanphamId);
+                model.id = mt.Id;
+                model.Name = mt.Name;
+                model.Amount = mt.Amount.ToString();
+                model.Price = mt.Price.ToString();
+                model.IdHang = mt.IdHang.ToString();
+                model.IdLoai = mt.MayTinh.IdLoaiMT;
+                model.IdCauHinh = mt.MayTinh.IdCH;
+                (Session["ManagerAction"] as ManagerViewModel).Heading = "Update";
+                (Session["ManagerAction"] as ManagerViewModel).SanPhamId = null;
+            }
+            else
+            {
+                ManagerViewModel managerViewModel = new ManagerViewModel()
+                {
+                    Heading = "Create",
+                    SanPhamId = null,
+                    Action = "Create_MayTinh",
+                };
+                Session["ManagerAction"] = managerViewModel;
+            }
             return View(model);
         }
         [HttpPost]
@@ -45,7 +69,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             {
                 if (model == null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("MayTinh", "MayTinh");
                 }
                 var id = Guid.NewGuid().ToString();
                 MayTinh mt = new MayTinh
@@ -67,14 +91,27 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 context.SaveChanges();
                 return RedirectToAction("MayTinh", "MayTinh", new { area = "Admin" });
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MayTinh", "MayTinh");
+        }
+        [HttpPost]
+        public ActionResult Update_MayTinh(MayTinhViewModel model)
+        {
+            var sanPham = context.SanPhams.FirstOrDefault(e=>e.Id==model.id);
+            sanPham.Name = model.Name;
+            sanPham.Amount = int.Parse(model.Amount);
+            sanPham.Price = int.Parse(model.Price);
+            sanPham.IdHang = model.IdHang.ToString();
+            sanPham.MayTinh.IdLoaiMT = model.IdLoai;
+            sanPham.MayTinh.IdCH = model.IdCauHinh;
+            context.SaveChanges();
+            return RedirectToAction("MayTinh", "MayTinh");
         }
         public ActionResult Details_MayTinh(string id)
         {
             var sp = context.SanPhams.ToList().FirstOrDefault(e => e.Id == id);
             if (sp == null)
             {
-                return RedirectToAction("LinhKien", "LinhKien", new { area = "Admin" });
+                return RedirectToAction("MayTinh", "MayTinh", new { area = "Admin" });
             }
             ListDetails_MayTinhViewModel model = new ListDetails_MayTinhViewModel();
             model.Details_MayTinh = new List<Details_MayTinhViewModel>();
@@ -107,6 +144,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             ViewBag.MayTinh = context.SanPhams.ToList().FirstOrDefault(e => e.Id == id);
             return View(model);
         }
+        
         [HttpPost]
         public ActionResult Details_MayTinh(ListDetails_MayTinhViewModel model,string idSanPham)
         {
@@ -139,6 +177,24 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             ct_LinhKien.IdMayTinh = idSanPham;
             context.CT_LinhKiens.Add(ct_LinhKien);
             context.SaveChanges();*/
+            return RedirectToAction("MayTinh", "MayTinh");
+        }
+
+        public ActionResult Edit_MayTinh(string id)
+        {
+            ManagerViewModel managerViewModel = new ManagerViewModel()
+            {
+                SanPhamId = id,
+                Action = "Update_MayTinh",
+            };
+            Session["ManagerAction"] = managerViewModel;
+            return RedirectToAction("MayTinh", "MayTinh");
+        }
+        public ActionResult Delete_LinhKien(string id)
+        {
+            var sanpham = context.SanPhams.FirstOrDefault(e=>e.Id== id);
+            context.SanPhams.Remove(sanpham);
+            context.SaveChanges();
             return RedirectToAction("MayTinh", "MayTinh");
         }
     }

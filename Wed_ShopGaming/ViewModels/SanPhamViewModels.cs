@@ -62,7 +62,6 @@ namespace Wed_ShopGaming.ViewModels
         public List<CauHinh> CauHinh { get; set; }
         public List<Hang> hangs { get; set; }
         public List<SanPham> SanPham { get; set; }
-
         public string IdLoai { get; set; }
         public List<LoaiMT> LoaiSP { get; set; }
     }
@@ -78,7 +77,7 @@ namespace Wed_ShopGaming.ViewModels
         public IPagedList<HinhAnhMainViewModel> LinhKien { get;set; }
         public IPagedList<HinhAnhMainViewModel> DanhChoBan { get; set; }
     }
-    public class GioHang
+    public class GioHangViewModel
     {
         public SanPham sanPham { get; set; }
         public int count { get; set; }

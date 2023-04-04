@@ -37,7 +37,7 @@
         }
         else
         {
-            count = (Session["GioHang"] as List<Wed_ShopGaming.ViewModels.GioHang>).Count();
+            count = (Session["GioHang"] as List<Wed_ShopGaming.ViewModels.GioHangViewModel>).Count();
         }
     }
 
@@ -129,8 +129,8 @@
                                     @if (Request.IsAuthenticated)
                                     {
                                         @Html.AntiForgeryToken()
-                                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "d-flex text-light text-center" })
-                                        @Html.ActionLink("Log Out", "Logout", "Account", htmlAttributes: new { @class = "text-light text-center" })
+                                        @Html.ActionLink( User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "d-flex text-light text-center" })
+                                        <a href="~/Account/Logout">LogOut</a>
                                     }
                                     else
                                     {

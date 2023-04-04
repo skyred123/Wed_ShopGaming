@@ -28,20 +28,45 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 LoaiSP = context.LoaiLKs.ToList(),
             };
             var sp = context.SanPhams.ToList();
-            List<SanPham> sanPhams= new List<SanPham>();
+            List<SanPham> sanPhams = new List<SanPham>();
             foreach (var item in sp)
             {
-                if(item.LinhKien != null)
+                if (item.LinhKien != null)
                 {
                     sanPhams.Add(item);
                 }
             }
             model.sanPham = sanPhams;
+
+            if (Session["ManagerAction"] != null && (Session["ManagerAction"]as ManagerViewModel).SanPhamId != null)
+            {
+                var sanphamId = (Session["ManagerAction"] as ManagerViewModel).SanPhamId;
+                var lk = context.SanPhams.FirstOrDefault(e => e.Id == sanphamId);
+                model.id = lk.Id;
+                model.Name = lk.Name;
+                model.Amount = lk.Amount.ToString();
+                model.Price= lk.Price.ToString();
+                model.IdHang= lk.IdHang.ToString();
+                model.IdLoai = lk.LinhKien.IdLoaiLK;
+                (Session["ManagerAction"] as ManagerViewModel).Heading = "Update";
+                (Session["ManagerAction"] as ManagerViewModel).SanPhamId = null;
+            }
+            else
+            {
+                ManagerViewModel managerViewModel = new ManagerViewModel()
+                {
+                    Heading = "Create",
+                    SanPhamId = null,
+                    Action = "Create_MayTinh",
+                };
+                Session["ManagerAction"] = managerViewModel;
+            }
+            
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create_LinhKien(LinhKienViewModels model, List<HttpPostedFileBase> files)
+        public ActionResult Create_LinhKien(LinhKienViewModels model)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +93,17 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 context.SaveChanges();
                 return RedirectToAction("LinhKien", "LinhKien", new { area = "Admin" });
             }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Update_LinhKien(LinhKienViewModels model)
+        {
+            var sanPham = context.SanPhams.FirstOrDefault(e => e.Id == model.id);
+            sanPham.Name = model.Name;
+            sanPham.Amount = int.Parse(model.Amount);
+            sanPham.Price = int.Parse(model.Price);
+            sanPham.IdHang = model.IdHang.ToString();
+            sanPham.LinhKien.IdLoaiLK = model.IdLoai;
+            context.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
         public ActionResult Description_LinhKien(string id)
@@ -128,10 +164,22 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult Edit_LinhKien(string id)
+        {
+            ManagerViewModel managerViewModel = new ManagerViewModel() { 
+                SanPhamId = id,
+                Action= "Update_LinhKien",
+            };
+            Session["ManagerAction"] = managerViewModel;
+            return RedirectToAction("LinhKien", "LinhKien");
+        }
         public ActionResult Delete_LinhKien(string id)
         {
-            return RedirectToAction("Index", "Home");
+            var sanpham = context.SanPhams.FirstOrDefault(e => e.Id == id);
+            context.SanPhams.Remove(sanpham);
+            context.SaveChanges();
+            return RedirectToAction("LinhKien", "LinhKien");
         }
-        
+
     }
 }
