@@ -175,7 +175,7 @@
         </div>
         <div class="text-center">
             Trang @(Model.DanhChoBan.PageCount < Model.DanhChoBan.PageNumber ? 0 : Model.DanhChoBan.PageNumber) / @Model.DanhChoBan.PageCount
-            @Html.PagedListPager(Model.DanhChoBan, page => Url.Action("PageList", "Home", new { page, check =3}))
+            @Html.PagedListPager(Model.DanhChoBan, page => Url.Action("PageList", "Home", new { page, check = 3 }))
         </div>
     </div>
 }

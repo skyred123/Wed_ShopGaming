@@ -181,12 +181,15 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinhKienController.cs" />
+    <Compile Include="Controllers\ThanhToanController.cs" />
     <Compile Include="Migrations\202304050427475_database.cs" />
     <Compile Include="Migrations\202304050427475_database.designer.cs">
       <DependentUpon>202304050427475_database.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\CT_DH.cs" />
     <Compile Include="Models\Entity\HoaDon.cs" />
+    <Compile Include="Others\MoMoSecurity.cs" />
+    <Compile Include="Others\PaymentRequest.cs" />
     <Compile Include="ViewModels\ManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\MayTinhController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpLoadFileController.cs" />
@@ -222,6 +225,7 @@
     <Compile Include="ViewModels\HinhAnhViewModel.cs" />
     <Compile Include="ViewModels\LoaiSPViewModel.cs" />
     <Compile Include="ViewModels\SanPhamViewModels.cs" />
+    <Compile Include="ViewModels\ThanhToanViewModel.cs" />
     <Compile Include="ViewModels\TSKTSPViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -596,10 +600,11 @@
     <Content Include="Views\Home\DanhSachSP.cshtml" />
     <Content Include="Views\Home\ChiTietSP.cshtml" />
     <Content Include="Views\Home\ListGioHang.cshtml" />
-    <Content Include="Views\Home\CheckOut.cshtml" />
+    <Content Include="Views\ThanhToan\CheckOut.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\ThanhToan\ThanhToanTC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
