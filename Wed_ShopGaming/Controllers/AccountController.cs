@@ -78,6 +78,8 @@ namespace Wed_ShopGaming.Controllers
                     Email = model.Email,
                     UserName = model.Email,
                     PasswordHash= password,
+                    PhoneNumber = model.Phone,
+                    Adress = model.Address,
                 };
                 IdentityResult identityResult  = userManager.Create(user);
                 if (identityResult.Succeeded)
