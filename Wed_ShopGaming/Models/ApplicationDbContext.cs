@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using Wed_ShopGaming.Models.Entity;
 
@@ -80,6 +81,14 @@ namespace Wed_ShopGaming.Models
                 .WithRequired(e=>e.SanPham) 
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<SanPham>()
+                .HasMany(e => e.CT_DHs)
+                .WithRequired(e => e.SanPham)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<HoaDon>()
+                .HasMany(e=>e.CT_DHs)
+                .WithRequired(e=>e.HoaDon) 
+                .WillCascadeOnDelete(false);
 
         }
         public static ApplicationDbContext Create()
@@ -94,9 +103,11 @@ namespace Wed_ShopGaming.Models
             dbContext.LoaiLKs.Include(e => e.LinhKiens).Load();
             dbContext.LoaiMTs.Include(e => e.MayTinh).Load();
             dbContext.MayTinhs.Include(e => e.SanPham).Include(e => e.CauHinh).Include(e => e.LoaiMT).Include(e=>e.CT_LinhKiens).Load();
-            dbContext.SanPhams.Include(e => e.MayTinh).Include(e => e.LinhKien).Include(e => e.HinhAnhs).Include(e => e.Hang).Include(e => e.GioHangs).Load();
+            dbContext.SanPhams.Include(e => e.MayTinh).Include(e => e.LinhKien).Include(e => e.HinhAnhs).Include(e => e.Hang).Include(e => e.GioHangs).Include(e=>e.CT_DHs).Load();
             dbContext.gioHangs.Include(e => e.SanPham).Include(e => e.User).Load();
             dbContext.TSKTs.Include(e => e.CT_TSKTs).Load();
+            dbContext.CT_DHs.Include(e => e.HoaDon).Include(e => e.SanPham).Load();
+            dbContext.HoaDons.Include(e=>e.User).Include(e=>e.CT_DHs).Load();
             return dbContext;
         }
         public DbSet<Hang> Hangs { get; set; }
@@ -111,5 +122,8 @@ namespace Wed_ShopGaming.Models
         public DbSet<CT_TSKT> CT_TSKTs { get; set; }
         public DbSet<CT_LinhKien> CT_LinhKiens { get; set; }
         public DbSet<GioHang> gioHangs { get; set; }
+
+        public DbSet<HoaDon> HoaDons { get; set; }
+        public DbSet<CT_DH> CT_DHs { get; set; }
     }
 }

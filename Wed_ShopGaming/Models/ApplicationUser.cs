@@ -16,8 +16,10 @@ namespace Wed_ShopGaming.Models
         public string Adress { get; set; }
         public ApplicationUser()
         {
+            HoaDons = new List<HoaDon>();
             GioHangs = new List<GioHang>();
         }
+        public ICollection<HoaDon> HoaDons { get; set; }
         public ICollection<GioHang> GioHangs { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
