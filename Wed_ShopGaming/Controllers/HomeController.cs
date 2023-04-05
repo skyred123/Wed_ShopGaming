@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.EnterpriseServices.CompensatingResourceManager;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -156,7 +157,26 @@ namespace Wed_ShopGaming.Controllers
 
                 }
             }
+            if (User.Identity.IsAuthenticated)
+            {
+                var listgiohang = context.gioHangs.Where(e => e.UserId == User.Identity.GetUserId());
+                List<GioHangViewModel> gioHangViewModel = new List<GioHangViewModel>();
+                foreach (var item in listgiohang)
+                {
+                    GioHangViewModel temp = new GioHangViewModel()
+                    {
+                        sanPham = item.SanPham,
+                        count = item.Count,
+                    };
+                    gioHangViewModel.Add(temp);
+                }
 
+                Session["GioHang"] = gioHangViewModel;
+            }
+            else
+            {
+                Session["GioHang"] = new List<GioHangViewModel>();
+            }
             return View(model);
         }
 
@@ -295,7 +315,9 @@ namespace Wed_ShopGaming.Controllers
                             sanPham = item.SanPham,
                             count = item.Count,
                         };
+                        gioHangViewModel.Add(temp);
                     }
+                    
                     Session["GioHang"] = gioHangViewModel;
 
                     GioHangViewModel item1 = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
@@ -371,7 +393,19 @@ namespace Wed_ShopGaming.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                Session["GioHang"] = context.gioHangs.Where(e => e.UserId == User.Identity.GetUserId());
+                var listgiohang = context.gioHangs.Where(e => e.UserId == User.Identity.GetUserId());
+                List<GioHangViewModel> gioHangViewModel = new List<GioHangViewModel>();
+                foreach (var item in listgiohang)
+                {
+                    GioHangViewModel temp = new GioHangViewModel()
+                    {
+                        sanPham = item.SanPham,
+                        count = item.Count,
+                    };
+                    gioHangViewModel.Add(temp);
+                }
+
+                Session["GioHang"] = gioHangViewModel;
             }
             var gioHangs = Session["GioHang"] as List<GioHangViewModel>;
             ViewBag.TongTien = TongTienGioHang();

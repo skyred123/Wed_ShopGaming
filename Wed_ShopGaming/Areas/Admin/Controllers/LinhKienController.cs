@@ -57,7 +57,7 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
                 {
                     Heading = "Create",
                     SanPhamId = null,
-                    Action = "Create_MayTinh",
+                    Action = "Create_LinhKien",
                 };
                 Session["ManagerAction"] = managerViewModel;
             }
