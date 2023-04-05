@@ -181,6 +181,12 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LinhKienController.cs" />
+    <Compile Include="Migrations\202304050427475_database.cs" />
+    <Compile Include="Migrations\202304050427475_database.designer.cs">
+      <DependentUpon>202304050427475_database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\CT_DH.cs" />
+    <Compile Include="Models\Entity\HoaDon.cs" />
     <Compile Include="ViewModels\ManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\MayTinhController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpLoadFileController.cs" />
@@ -189,10 +195,6 @@
     <Compile Include="Areas\Admin\Controllers\QLSanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304040547257_database.cs" />
-    <Compile Include="Migrations\202304040547257_database.designer.cs">
-      <DependentUpon>202304040547257_database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity\CauHinh.cs" />
@@ -610,8 +612,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304040547257_database.resx">
-      <DependentUpon>202304040547257_database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304050427475_database.resx">
+      <DependentUpon>202304050427475_database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -27,5 +27,7 @@ namespace Wed_ShopGaming.Models.Entity
         public virtual LinhKien LinhKien { get; set; }
 
         public virtual MayTinh MayTinh { get; set; }
+
+        public virtual ICollection<CT_DH> CT_DHs { get; set; }
     }
 }

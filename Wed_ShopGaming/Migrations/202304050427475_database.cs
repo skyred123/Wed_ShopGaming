@@ -107,17 +107,32 @@
                 .Index(t => t.IdHang);
             
             CreateTable(
-                "dbo.GioHangs",
+                "dbo.CT_DH",
                 c => new
                     {
                         SanPhamId = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        Count = c.Int(nullable: false),
+                        HoaDonId = c.String(nullable: false, maxLength: 128),
+                        Amount = c.String(),
+                        Price = c.String(),
                     })
-                .PrimaryKey(t => new { t.SanPhamId, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .PrimaryKey(t => new { t.SanPhamId, t.HoaDonId })
+                .ForeignKey("dbo.HoaDons", t => t.HoaDonId)
                 .ForeignKey("dbo.SanPhams", t => t.SanPhamId)
                 .Index(t => t.SanPhamId)
+                .Index(t => t.HoaDonId);
+            
+            CreateTable(
+                "dbo.HoaDons",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(maxLength: 128),
+                        Status = c.String(),
+                        Payments = c.String(),
+                        Price = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -152,6 +167,20 @@
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.GioHangs",
+                c => new
+                    {
+                        SanPhamId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        Count = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.SanPhamId, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .ForeignKey("dbo.SanPhams", t => t.SanPhamId)
+                .Index(t => t.SanPhamId)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -233,10 +262,13 @@
             DropForeignKey("dbo.HinhAnhs", "IDSanPham", "dbo.SanPhams");
             DropForeignKey("dbo.SanPhams", "IdHang", "dbo.Hangs");
             DropForeignKey("dbo.GioHangs", "SanPhamId", "dbo.SanPhams");
+            DropForeignKey("dbo.CT_DH", "SanPhamId", "dbo.SanPhams");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.HoaDons", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.GioHangs", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.CT_DH", "HoaDonId", "dbo.HoaDons");
             DropForeignKey("dbo.LinhKiens", "IdLoaiLK", "dbo.LoaiLKs");
             DropForeignKey("dbo.CT_TSKT", "IdLinhKien", "dbo.LinhKiens");
             DropForeignKey("dbo.CT_TSKT", "IdTSKT", "dbo.TSKTs");
@@ -246,10 +278,13 @@
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.GioHangs", new[] { "UserId" });
             DropIndex("dbo.GioHangs", new[] { "SanPhamId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.HoaDons", new[] { "UserId" });
+            DropIndex("dbo.CT_DH", new[] { "HoaDonId" });
+            DropIndex("dbo.CT_DH", new[] { "SanPhamId" });
             DropIndex("dbo.SanPhams", new[] { "IdHang" });
             DropIndex("dbo.CT_TSKT", new[] { "IdTSKT" });
             DropIndex("dbo.CT_TSKT", new[] { "IdLinhKien" });
@@ -266,9 +301,11 @@
             DropTable("dbo.Hangs");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.GioHangs");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.GioHangs");
+            DropTable("dbo.HoaDons");
+            DropTable("dbo.CT_DH");
             DropTable("dbo.SanPhams");
             DropTable("dbo.LoaiLKs");
             DropTable("dbo.TSKTs");
