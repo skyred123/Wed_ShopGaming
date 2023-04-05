@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202304050427475_database.designer.cs">
       <DependentUpon>202304050427475_database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304051913421_update.cs" />
+    <Compile Include="Migrations\202304051913421_update.designer.cs">
+      <DependentUpon>202304051913421_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\CT_DH.cs" />
     <Compile Include="Models\Entity\HoaDon.cs" />
     <Compile Include="Others\MoMoSecurity.cs" />
@@ -619,6 +623,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202304050427475_database.resx">
       <DependentUpon>202304050427475_database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304051913421_update.resx">
+      <DependentUpon>202304051913421_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
