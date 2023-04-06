@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202304050427475_database.designer.cs">
       <DependentUpon>202304050427475_database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304051913421_update.cs" />
+    <Compile Include="Migrations\202304051913421_update.designer.cs">
+      <DependentUpon>202304051913421_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\CT_DH.cs" />
     <Compile Include="Models\Entity\HoaDon.cs" />
     <Compile Include="Others\MoMoSecurity.cs" />
@@ -229,6 +233,68 @@
     <Compile Include="ViewModels\TSKTSPViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents_Custom\assets\css\bootstrap.min.css" />
+    <Content Include="Contents_Custom\assets\css\default-css.css" />
+    <Content Include="Contents_Custom\assets\css\font-awesome.min.css" />
+    <Content Include="Contents_Custom\assets\css\metisMenu.css" />
+    <Content Include="Contents_Custom\assets\css\owl.carousel.min.css" />
+    <Content Include="Contents_Custom\assets\css\responsive.css" />
+    <Content Include="Contents_Custom\assets\css\slicknav.min.css" />
+    <Content Include="Contents_Custom\assets\css\styles.css" />
+    <Content Include="Contents_Custom\assets\css\themify-icons.css" />
+    <Content Include="Contents_Custom\assets\css\typography.css" />
+    <Content Include="Contents_Custom\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Contents_Custom\assets\fonts\themify.svg" />
+    <Content Include="Contents_Custom\assets\images\author\author-img1.jpg" />
+    <Content Include="Contents_Custom\assets\images\author\author-img2.jpg" />
+    <Content Include="Contents_Custom\assets\images\author\author-img3.jpg" />
+    <Content Include="Contents_Custom\assets\images\author\author-img4.jpg" />
+    <Content Include="Contents_Custom\assets\images\author\avatar.png" />
+    <Content Include="Contents_Custom\assets\images\bg\singin-bg.jpg" />
+    <Content Include="Contents_Custom\assets\images\blog\post-thumb1.jpg" />
+    <Content Include="Contents_Custom\assets\images\blog\post-thumb2.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img1.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img10.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img2.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img3.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img4.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img5.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img6.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img7.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img8.jpg" />
+    <Content Include="Contents_Custom\assets\images\card\card-img9.jpg" />
+    <Content Include="Contents_Custom\assets\images\icon\loader.gif" />
+    <Content Include="Contents_Custom\assets\images\icon\logo.png" />
+    <Content Include="Contents_Custom\assets\images\icon\logo2.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\icon1.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\icon2.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\icon3.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\icon4.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\trends-down-icon.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\trends-up-icon.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\triangle-down.png" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\triangle-up.png" />
+    <Content Include="Contents_Custom\assets\images\media\media1.jpg" />
+    <Content Include="Contents_Custom\assets\images\media\media2.jpg" />
+    <Content Include="Contents_Custom\assets\images\team\team-author1.jpg" />
+    <Content Include="Contents_Custom\assets\images\team\team-author2.jpg" />
+    <Content Include="Contents_Custom\assets\images\team\team-author3.jpg" />
+    <Content Include="Contents_Custom\assets\images\team\team-author4.jpg" />
+    <Content Include="Contents_Custom\assets\images\team\team-author5.jpg" />
+    <Content Include="Contents_Custom\assets\js\bar-chart.js" />
+    <Content Include="Contents_Custom\assets\js\bootstrap.min.js" />
+    <Content Include="Contents_Custom\assets\js\jquery.slicknav.min.js" />
+    <Content Include="Contents_Custom\assets\js\jquery.slimscroll.min.js" />
+    <Content Include="Contents_Custom\assets\js\line-chart.js" />
+    <Content Include="Contents_Custom\assets\js\maps.js" />
+    <Content Include="Contents_Custom\assets\js\metisMenu.min.js" />
+    <Content Include="Contents_Custom\assets\js\owl.carousel.min.js" />
+    <Content Include="Contents_Custom\assets\js\pie-chart.js" />
+    <Content Include="Contents_Custom\assets\js\plugins.js" />
+    <Content Include="Contents_Custom\assets\js\popper.min.js" />
+    <Content Include="Contents_Custom\assets\js\scripts.js" />
+    <Content Include="Contents_Custom\assets\js\vendor\jquery-2.2.4.min.js" />
+    <Content Include="Contents_Custom\assets\js\vendor\modernizr-2.8.3.min.js" />
     <Content Include="Contents_Custom\csss\bootstrap-grid.css" />
     <Content Include="Contents_Custom\csss\bootstrap-grid.min.css" />
     <Content Include="Contents_Custom\csss\bootstrap-reboot.css" />
@@ -571,6 +637,16 @@
     <Content Include="Contents_Custom\scss\bootstrap\scss\_variables.scss" />
     <Content Include="Contents_Custom\scss\style.scss" />
     <Content Include="Areas\Admin\Views\QLSanPham\LoaiMT.cshtml" />
+    <Content Include="Contents_Custom\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Contents_Custom\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Contents_Custom\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Contents_Custom\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Contents_Custom\assets\fonts\FontAwesome.otf" />
+    <Content Include="Contents_Custom\assets\fonts\themify.eot" />
+    <Content Include="Contents_Custom\assets\fonts\themify.ttf" />
+    <Content Include="Contents_Custom\assets\fonts\themify.woff" />
+    <Content Include="Contents_Custom\assets\images\icon\market-value\Thumbs.db" />
+    <Content Include="Contents_Custom\assets\images\icon\Thumbs.db" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -595,16 +671,18 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\QLSanPham\LoaiLK.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DanhSachSP.cshtml" />
     <Content Include="Views\Home\ChiTietSP.cshtml" />
     <Content Include="Views\Home\ListGioHang.cshtml" />
     <Content Include="Views\ThanhToan\CheckOut.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_LoginsPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\ThanhToan\ThanhToanTC.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutDangNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -619,6 +697,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202304050427475_database.resx">
       <DependentUpon>202304050427475_database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304051913421_update.resx">
+      <DependentUpon>202304051913421_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
