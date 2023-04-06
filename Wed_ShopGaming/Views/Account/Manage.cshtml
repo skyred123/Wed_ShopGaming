@@ -24,21 +24,21 @@
                         <i class="ti-email"></i>
                         <div class="text-danger"></div>
                     </div>
-                    @Html.Label("Phone", new { @for = "" })
+                    @Html.Label("Số Điện Thoại", new { @for = "" })
                     <div class="form-gp">
 
                         @Html.EditorFor(m => m.User.PhoneNumber)
                         <i class="ti-mobile"></i>
                         <div class="text-danger"></div>
                     </div>
-                    @Html.Label("Address", new { @for = "" })
+                    @Html.Label("Địa Chỉ", new { @for = "" })
                     <div class="form-gp">
 
                         @Html.EditorFor(m => m.User.Adress)
                         <i class="ti-comment"></i>
                         <div class="text-danger"></div>
                     </div>
-                    @Html.Label("Roles", new { @for = "" })
+                    @Html.Label("Quyền", new { @for = "" })
                     <div class="form-gp">
 
                         @Html.DisplayFor( m=>m.NameRole)

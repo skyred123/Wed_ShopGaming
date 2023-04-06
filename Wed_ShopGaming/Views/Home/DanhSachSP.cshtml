@@ -33,10 +33,10 @@
                 </div>
             </div>
         }
-        <div class="">
-            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    </div>
+    <div class="text-center">
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
-            @Html.PagedListPager(Model, page => Url.Action("PageList", "Home", new { page, ViewBag.check }))
-        </div>
+        @Html.PagedListPager(Model, page => Url.Action("PageList", "Home", new { page, ViewBag.check }))
     </div>
 </div>

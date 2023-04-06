@@ -8,16 +8,16 @@
     <div class="col-lg-7">
         <table class="table">
             <tr>
-                <th>Ten user</th>
-                <th>Vai Tro</th>
-                <th>Tac Vu</th>
+                <th>Tên Người Dùng</th>
+                <th>Vai Trò</th>
+                <th>Tác Vụ</th>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
                     <td> @item.User.UserName</td>
                     <td> @item.NameRole</td>
-                    <td> @Html.ActionLink("Delete","Delete", new { id = item.User.Id })</td>
+                    <td> @Html.ActionLink("Xóa","Delete", new { id = item.User.Id })</td>
                 </tr>
             }
         </table>

@@ -87,7 +87,7 @@
 <div class="d-flex row">
     @using (Html.BeginForm("Delete_File", "UploadFile", FormMethod.Post))
     {
-        <input class="btn btn-primary" type="submit" value="Delete" />
+        <input class="btn btn-primary" type="submit" value="Xóa" />
         <input type="hidden" name="idSanPham" value="@SP.Id" />
         <div class="d-flex row">
             @for (int i = 0; i < Model.HinhAnhs.Count; i++)

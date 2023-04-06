@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.EnterpriseServices.CompensatingResourceManager;
 using System.Data.Entity.Migrations;
+using System.Drawing.Printing;
+using System.Web.UI;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -265,19 +267,29 @@ namespace Wed_ShopGaming.Controllers
             Session["PagingSP"] = model.ToPagedList((int)page, pageSize);
             return RedirectToAction("DanhSachSP", "Home", new {check = check});
         }
-        public ActionResult DanhSachSP(int check)
+        public ActionResult DanhSachSP(int? check)
         {
-            ViewBag.check = check;
+            if(check== null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             IPagedList<HinhAnhMainViewModel> model;
+            if (check ==0 && Session["PagingSP"] != null)
+            {
+                return View(Session["PagingSP"] as IPagedList<HinhAnhMainViewModel>); 
+            }
+            ViewBag.check = check;
+            
             if (Session["PagingSP"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            else
+            else if (Session["PagingSP"] != null)
             {
                 model = Session["PagingSP"] as IPagedList<HinhAnhMainViewModel>;
+                return View(model);
             }
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult ChiTietSP(string id)
         {
@@ -511,6 +523,50 @@ namespace Wed_ShopGaming.Controllers
             Session["page"]  = page;
             Session["check"] = check;
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult DanhSachLoaiSP(string id,int check)
+        {
+            var mt = new List<MayTinh>();
+            var lk = new List<LinhKien>();
+            List<HinhAnhMainViewModel> model = new List<HinhAnhMainViewModel>();
+            if (check == 1)
+            {
+                mt = context.LoaiMTs.Where(e=>e.Id== id).FirstOrDefault().MayTinh.ToList();
+                foreach (var item in mt)
+                {
+                    HinhAnhMainViewModel hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.SanPham.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.SanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item.SanPham;
+                    model.Add(hinhAnhMain);
+                }
+            }
+            else
+            {
+                lk = context.LoaiLKs.Where(e => e.Id == id).FirstOrDefault().LinhKiens.ToList();
+                foreach (var item in lk)
+                {
+                    HinhAnhMainViewModel hinhAnhMain = new HinhAnhMainViewModel();
+                    if (item.SanPham.HinhAnhs.Count() != 0)
+                    {
+                        hinhAnhMain.img = item.SanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        hinhAnhMain.img = "";
+                    }
+                    hinhAnhMain.sanPham = item.SanPham;
+                    model.Add(hinhAnhMain);
+                }
+            }
+            Session["PagingSP"] = model.ToPagedList((int)1, model.Count());
+            return RedirectToAction("DanhSachSP", "Home", new { check = 0 });
         }
     }
 }
