@@ -81,6 +81,12 @@ namespace Wed_ShopGaming.Controllers
                     PhoneNumber = model.Phone,
                     Adress = model.Address,
                 };
+                var email = userManager.FindById(user.Id);
+                if (email.Email == model.Email)
+                {
+                    ModelState.AddModelError("Add Error", "Error");
+                    return View(model);
+                }
                 IdentityResult identityResult  = userManager.Create(user);
                 if (identityResult.Succeeded)
                 {
@@ -223,6 +229,13 @@ namespace Wed_ShopGaming.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.DefaultUserName, Email = model.Email };
+                var email = UserManager.FindById(user.Id);
+                if (email.Email == model.Email)
+                {
+                    ViewBag.ReturnUrl = returnUrl;
+                    ModelState.AddModelError("Add Error", "Error");
+                    return View(model);
+                }
                 var result = await UserManager.CreateAsync(user);
                 var checkEmail = UserManager.FindById(user.Email);
                 UserManager.AddToRole(user.Id, "Customer");
@@ -245,11 +258,29 @@ namespace Wed_ShopGaming.Controllers
         public ActionResult Manage()
         {
             var userid= User.Identity.GetUserId();
-            var model = UserManager.FindById(userid);
+            var user = UserManager.FindById(userid);
+            ListUserViewModel model = new ListUserViewModel();
+            model.User = user;
+            model.NameRole = UserManager.GetRoles(userid).FirstOrDefault();
             return View(model);
         }
+        [HttpPost]
+        public ActionResult Update(ListUserViewModel model)
+        {
+            var userid = User.Identity.GetUserId();
+            var user = UserManager.FindById(userid);
+            user.Adress = model.User.Adress;
+            user.PhoneNumber = model.User.PhoneNumber;
+            UserManager.Update(user);
+            return RedirectToAction("Manage", "Account");
+        }
+        public ActionResult Order()
+        {
+            var userid= User.Identity.GetUserId();
 
-
+            List<HoaDon> model = _dbContext.HoaDons.Where(e=>e.UserId==userid).ToList();
+            return View(model);
+        }
 
 
 

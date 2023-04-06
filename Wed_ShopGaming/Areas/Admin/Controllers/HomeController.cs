@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Wed_ShopGaming.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         // GET: Admin/Home

@@ -1,94 +1,68 @@
-﻿<!DOCTYPE html>
+﻿
 @using Microsoft.AspNet.Identity
+<!doctype html>
+<html class="no-js" lang="en">
 
-<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/Content/modernizr")*@
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />-->
-
-    <!-- Google Web Fonts -->
-    <!--<link rel="preconnect" href="https://fonts.gstatic.com">-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <!-- Libraries Stylesheet -->
-    <link href="~/Contents_Custom/lib/animate/animate.min.css" rel="stylesheet" />
-    <script src="~/Contents_Custom/lib/owlcarousel/owl.carousel.min.js"></script>
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/Contents_Custom/css/style.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>srtdash - Starter Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="~/Contents_Custom/assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/metisMenu.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/typography.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/default-css.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/styles.css">
+    <link rel="stylesheet" href="~/Contents_Custom/assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="~/Contents_Custom/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body class="">
-    <header>
-        <!-- Topbar Start -->
-        <div class="container-fluid">
-            <div class="row bg-secondary py-1 px-xl-5">
-                <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center d-block d-lg-none">
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-heart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-shopping-cart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                    </div>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="#"><img src="~/Contents_Custom/assets/images/icon/logo.png" alt="logo"></a>
                 </div>
             </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-                <div class="col-lg-4">
-                    <a href="~/Areas/Admin/Views/Home/Index" class="text-decoration-none">
-                        <span class="h3 text-uppercase text-primary bg-dark px-2">Multi</span>
-                        <span class="h3 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-6 text-left">
-                    <form action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
-                            <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Topbar End -->
-        <!-- Navbar Start -->
-        <div class="container-fluid bg-dark">
-            <div class="row">
-                <div class="">
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                        <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                        </a>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                @Html.ActionLink("Danh Sach Nguoi Dung", "Index", "Account", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li class="dropdown">
-                                        <a href="" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown">San pham<span class=""></span></a>
-                                        <ul class="dropdown-menu bg-dark">
-                                            <li>
-                                                @Html.ActionLink("Linh kien", "LinhKien", "LinhKien", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
-                                            </li>
-                                            <li>
-                                                @Html.ActionLink("May Tinh", "MayTinh", "MayTinh", new { area = "Admin" }, htmlAttributes: new { @class = "nav-item nav-link " })
-                                            </li>
-                                        </ul>
-                                    </li>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <li><a href="@Url.Action( "Index", "Account", new { area = "Admin" })"><i class="ti-user"></i><span>Danh Sách Người Dùng</span></a></li>
+                            <li class="">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-desktop"></i><span>Máy Tính</span></a>
+                                <ul class="collapse">
+                                    <li><a href=" @Url.Action( "MayTinh", "MayTinh", new { area = "Admin" })">Máy Tính</a></li>
+                                    <li><a href=" @Url.Action( "LoaiMT", "QlSanPham", new { area = "Admin" })">Loại Máy Tính</a></li>
+                                    <li><a href=" @Url.Action( "CauHinhSP", "QlSanPham", new { area = "Admin" })">Cấu Hình</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-desktop"></i><span>Linh Kiện</span></a>
+                                <ul class="collapse">
+                                    <li><a href=" @Url.Action( "LinhKien", "LinhKien", new { area = "Admin" })">Linh Kiện</a></li>
+                                    <li><a href=" @Url.Action( "LoaiLK", "QlSanPham", new { area = "Admin" })">Loại Linh Kiện</a></li>
+                                    <li><a href=" @Url.Action( "TSKTSP", "QlSanPham", new { area = "Admin" })">Thông Số Linh Kiện</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown">
@@ -127,18 +101,18 @@
                                 @if (Request.IsAuthenticated)
                                 {
                                     @Html.AntiForgeryToken()
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        @Html.Label("Hello " + User.Identity.GetUserName() + "!", htmlAttributes: new { @class = "d-flex " })
-                                        <a href="~/Account/Logout">Log Out</a>
+                                    <a href="" class="dropdown-toggle nav-item nav-link text-light" data-toggle="dropdown">My Account<span class=""></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right text-light">
+                                        @Html.Label("Hello " + User.Identity.GetUserName() + "!", htmlAttributes: new { @class = "d-flex text-light" })
+                                        <a href="~/Account/Logout" class="text-light">Log Out</a>
                                     </div>
                                 }
                                 else
                                 {
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="~/Account/Register" class="d-flex">Register</a>
-                                        <a href="~/Account/Login">Log in</a>
+                                    <a href="" class="dropdown-toggle nav-item nav-link text-light" data-toggle="dropdown">My Account<span class=""></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="~/Account/Register" class="d-flex text-light">Register</a>
+                                        <a href="~/Account/Login" class="text-light">Log in</a>
                                     </div>
                                 }
                             </div>
@@ -147,25 +121,37 @@
                 </div>
             </div>
         </div>
-        <!-- Navbar End -->
-    </header>
-
-    <div class="">
-        @RenderBody()
-        <hr />
     </div>
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Contents_Custom/lib/easing/easing.min.js"></script>
-     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <!-- offset area end -->
+    <!-- jquery latest version -->
+    <script src="~/Contents_Custom/assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="~/Contents_Custom/assets/js/popper.min.js"></script>
+    <script src="~/Contents_Custom/assets/js/bootstrap.min.js"></script>
+    <script src="~/Contents_Custom/assets/js/owl.carousel.min.js"></script>
+    <script src="~/Contents_Custom/assets/js/metisMenu.min.js"></script>
+    <script src="~/Contents_Custom/assets/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Contents_Custom/assets/js/jquery.slicknav.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="~/Contents_Custom/mail/jqBootstrapValidation.min.js"></script>
-    <script src="~/Contents_Custom/mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="~/Contents_Custom/js/main.js"></script>
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+    <!-- all line chart activation -->
+    <script src="~/Contents_Custom/assets/js/line-chart.js"></script>
+    <!-- all pie chart -->
+    <script src="~/Contents_Custom/assets/js/pie-chart.js"></script>
+    <!-- others plugins -->
+    <script src="~/Contents_Custom/assets/js/plugins.js"></script>
+    <script src="~/Contents_Custom/assets/js/scripts.js"></script>
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
+
+
