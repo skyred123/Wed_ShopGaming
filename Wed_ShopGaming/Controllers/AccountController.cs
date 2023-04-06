@@ -140,7 +140,15 @@ namespace Wed_ShopGaming.Controllers
                                 UserId =user.Id,
                                 Count = item.count,
                             };
-                            _dbContext.gioHangs.Add(temp);
+                            var gh = _dbContext.gioHangs.FirstOrDefault(e => e.SanPhamId == item.sanPham.Id && e.UserId == user.Id);
+                            if (gh==null)
+                            {
+                                _dbContext.gioHangs.Add(temp);
+                            }
+                            else
+                            {
+                                gh.Count++;
+                            }
                             _dbContext.SaveChanges();
                         }
                     }

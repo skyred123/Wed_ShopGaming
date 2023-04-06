@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.EnterpriseServices.CompensatingResourceManager;
+using System.Data.Entity.Migrations;
 
 namespace Wed_ShopGaming.Controllers
 {
@@ -209,7 +210,7 @@ namespace Wed_ShopGaming.Controllers
             }
             if (check == 2)
             {
-                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
+                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("May Tinh") == true || e.MayTinh.LoaiMT.Name.Contains("Máy Tính") == true))
                 {
                     HinhAnhMainViewModel hinhAnhMain = new HinhAnhMainViewModel();
                     if (item.HinhAnhs.Count() != 0)
@@ -226,7 +227,7 @@ namespace Wed_ShopGaming.Controllers
             }
             if (check == 3)
             {
-                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false || e.MayTinh.LoaiMT.Name.Contains("MayTinh") == true))
+                foreach (var item in context.SanPhams.Where(e => e.MayTinh.LoaiMT.Name.Contains("LapTop") == false && e.MayTinh.LoaiMT.Name.Contains("May Tinh") == false && e.MayTinh.LoaiMT.Name.Contains("Máy Tính") == false))
                 {
                     HinhAnhMainViewModel hinhAnhMain = new HinhAnhMainViewModel();
                     if (item.HinhAnhs.Count() != 0)
@@ -262,10 +263,11 @@ namespace Wed_ShopGaming.Controllers
                 }
             }
             Session["PagingSP"] = model.ToPagedList((int)page, pageSize);
-            return RedirectToAction("DanhSachSP", "Home");
+            return RedirectToAction("DanhSachSP", "Home", new {check = check});
         }
-        public ActionResult DanhSachSP()
+        public ActionResult DanhSachSP(int check)
         {
+            ViewBag.check = check;
             IPagedList<HinhAnhMainViewModel> model;
             if (Session["PagingSP"] == null)
             {
@@ -308,6 +310,8 @@ namespace Wed_ShopGaming.Controllers
                     };
                     giohang.Count = item.count;
                     (Session["GioHang"] as List<GioHangViewModel>).Add(item);
+                    giohang.SanPhamId = sanPham.Id;
+                    context.gioHangs.Add(giohang);
                 }
                 else if (check != null)
                 {
@@ -324,11 +328,13 @@ namespace Wed_ShopGaming.Controllers
                     
                     Session["GioHang"] = gioHangViewModel;
 
-                    GioHangViewModel item1 = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
+                    var item1 = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
                     if (item1 != null)
                     {
+                        var gh = context.gioHangs.FirstOrDefault(e => e.SanPhamId == item1.sanPham.Id && e.UserId == userid);
                         item1.count++;
                         giohang.Count++;
+                        gh.Count++;
                     }
                     else
                     {
@@ -340,10 +346,10 @@ namespace Wed_ShopGaming.Controllers
                         };
                         giohang.Count= temp.count;
                         (Session["GioHang"] as List<GioHangViewModel>).Add(temp);
+                        giohang.SanPhamId = sanPham.Id;
+                        context.gioHangs.Add(giohang);
                     }
                 }
-                giohang.SanPhamId = sanPham.Id;
-                context.gioHangs.Add(giohang);
                 context.SaveChanges();
             }
             else
@@ -361,7 +367,7 @@ namespace Wed_ShopGaming.Controllers
                 }
                 else
                 {
-                    GioHangViewModel item = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
+                    var item = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
                     if (item != null)
                     {
                         item.count++;
@@ -376,6 +382,72 @@ namespace Wed_ShopGaming.Controllers
                         };
                         (Session["GioHang"] as List<GioHangViewModel>).Add(giohang);
                     }
+                }
+            }
+            return Redirect(strURL);
+        }
+        public ActionResult DeleteCountGioHang(string id, string strURL)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var sp = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e=>e.sanPham.Id == id);
+                if(sp != null)
+                {
+                    var item = context.gioHangs.FirstOrDefault(e=>e.SanPhamId== id);
+                    if(item != null && item.Count!=1) {
+                        sp.count--;
+                        item.Count--;
+                    }
+                    else
+                    {
+                        (Session["GioHang"] as List<GioHangViewModel>).Remove(sp);
+                        context.gioHangs.Remove(item);
+                    }
+                    context.SaveChanges();
+                }
+            }
+            else
+            {
+                var sp = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e=>e.sanPham.Id == id);
+                if(sp != null)
+                {
+                    if(sp != null && sp.count!=1) {
+                        sp.count--;
+                    }
+                    else
+                    {
+                        (Session["GioHang"] as List<GioHangViewModel>).Remove(sp);
+                    }
+                }
+            }
+            return Redirect(strURL);
+        }
+        public ActionResult DeleteGioHang(string id, string strURL)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var sp = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
+                if (sp != null)
+                {
+                    var item = context.gioHangs.FirstOrDefault(e => e.SanPhamId == id);
+                    if (item != null)
+                    {
+                        (Session["GioHang"] as List<GioHangViewModel>).Remove(sp);
+                        context.gioHangs.Remove(item); context.SaveChanges();
+                    }
+                    
+                }
+            }
+            else
+            {
+                var sp = (Session["GioHang"] as List<GioHangViewModel>).FirstOrDefault(e => e.sanPham.Id == id);
+                if (sp != null)
+                {
+                    if (sp != null)
+                    {
+                        (Session["GioHang"] as List<GioHangViewModel>).Remove(sp);
+                    }
+
                 }
             }
             return Redirect(strURL);
@@ -422,7 +494,14 @@ namespace Wed_ShopGaming.Controllers
             {
                 HinhAnhMainViewModel temp = new HinhAnhMainViewModel();
                 temp.sanPham = item.sanPham;
-                temp.img = item.sanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                if (item.sanPham.HinhAnhs.Count() != 0)
+                {
+                    temp.img = item.sanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                }
+                else
+                {
+                    temp.img = "";
+                }
                 temp.count = item.count;
                 model.Add(temp);
             }
