@@ -43,7 +43,8 @@ namespace Wed_ShopGaming.Controllers
                     hinhAnhMain = new HinhAnhMainViewModel();
                     if (item.HinhAnhs.Count() != 0)
                     {
-                        hinhAnhMain.img = item.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                        var hinhanh = item.HinhAnhs.OrderBy(e=>e.STT).FirstOrDefault();
+                        hinhAnhMain.img = hinhanh.Img;
                     }
                     else
                     {
