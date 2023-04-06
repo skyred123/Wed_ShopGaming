@@ -52,7 +52,7 @@ namespace Wed_ShopGaming.Controllers
         }
         public ActionResult ThanhToan(string payment)
         {
-            var viewModel = Session["ThanhToan"] as List<HinhAnhMainViewModel>;
+            List<HinhAnhMainViewModel> viewModel = Session["ThanhToan"] as List<HinhAnhMainViewModel>;
             if (viewModel != null && payment != null)
             {
                 if (payment == "COD")
@@ -62,7 +62,8 @@ namespace Wed_ShopGaming.Controllers
                         Id = Guid.NewGuid().ToString(),
                         UserId = User.Identity.GetUserId(),
                         Status = "Chua Thanh Toan",
-                        Payments = payment,
+                        OrderStatus = "Cho Xac Nhan",
+                    Payments = payment,
                     };
                     List<CT_DH> dhList = new List<CT_DH>(); 
                     foreach(var item in viewModel)
@@ -76,32 +77,37 @@ namespace Wed_ShopGaming.Controllers
                         dhList.Add(cT_DH);
                     }
                     hoaDon.Price = result.ToString();
+                    hoaDon.DateTime= DateTime.Now;
                     context.HoaDons.Add(hoaDon);
                     context.CT_DHs.AddRange(dhList);
-                    context.SaveChanges();
                     var userid = User.Identity.GetUserId();
                     var giohang = context.gioHangs.Where(e => e.UserId == userid);
                     context.gioHangs.RemoveRange(giohang);
                     context.SaveChanges();
-                    RedirectToAction("ThanhToan", "ThanhToan");
+                    RedirectToAction("ThanhToanTC", "ThanhToan", new { check = true });
+                }
+                else if (payment == "MOMO")
+                {
+                    return RedirectToAction("Payment", "ThanhToan", viewModel);
                 }
             }
-            else if (payment == "MOMO")
-            {
-                return RedirectToAction("Payment", "ThanhToan");
-            }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ThanhToanTC", "ThanhToan", new { check = false });
         }
         public ActionResult Payment()
         {
+            List<HinhAnhMainViewModel> model = Session["ThanhToan"] as List<HinhAnhMainViewModel>;
+            if (model == null)
+            {
+                return RedirectToAction("ThanhToanTC", "ThanhToan", new { check = false });
+            }
             //request params need to request to MoMo system
             string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
             string partnerCode = "MOMOOJOI20210710";
             string accessKey = "iPXneGmrJH0G8FOP";
             string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
-            string orderInfo = "test";
-            string returnUrl = "https://localhost:44370/ThanhToan/ThanhToanTC";
-            string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/Home/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+            string orderInfo = "Thanh Toan Mua Hang wed Shop Gaming: " + model.Sum(e => e.count * e.sanPham.Price);
+            string returnUrl = "https://localhost:44370/ThanhToan/ConfirmPaymentClient";
+            string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/ThanhToan/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
             string amount = "1000";
             string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
@@ -147,11 +153,62 @@ namespace Wed_ShopGaming.Controllers
 
             return Redirect(jmessage.GetValue("payUrl").ToString());
         }
-        public ActionResult ThanhToanTC()
+        public ActionResult ConfirmPaymentClient(MoMoViewModel model)
         {
+            string rMessage = model.message;
+            string rOrderId = model.orderId;
+            string rErrorCode = model.errorCode; // = 0: thanh toán thành công
+            string rmount = model.amount;
+            if (model.errorCode =="0")
+            {
+                var viewModel = Session["ThanhToan"] as List<HinhAnhMainViewModel>;
+                double result = 0;
+                HoaDon hoaDon = new HoaDon()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserId = User.Identity.GetUserId(),
+                    Status = "Da Thanh Toan",
+                    OrderStatus = "Cho Xac Nhan",
+                    Payments = "MOMO",
+                };
+                List<CT_DH> dhList = new List<CT_DH>();
+                foreach (var item in viewModel)
+                {
+                    CT_DH cT_DH = new CT_DH();
+                    cT_DH.SanPhamId = item.sanPham.Id;
+                    cT_DH.HoaDonId = hoaDon.Id;
+                    cT_DH.Amount = item.count.ToString();
+                    cT_DH.Price = item.sanPham.Price.ToString();
+                    result = result + (item.count * item.sanPham.Price);
+                    dhList.Add(cT_DH);
+                }
+                hoaDon.Price = result.ToString();
+                hoaDon.DateTime = DateTime.Now;
+                context.HoaDons.Add(hoaDon);
+                context.CT_DHs.AddRange(dhList);
+                var userid = User.Identity.GetUserId();
+                var giohang = context.gioHangs.Where(e => e.UserId == userid);
+                context.gioHangs.RemoveRange(giohang);
+                context.SaveChanges();
+                return RedirectToAction("ThanhToanTC", "ThanhToan", new {check = true});
+            }
+            else
+            {
+                return RedirectToAction("ThanhToanTC", "ThanhToan", new { check = false });
+            }
+        }
+        public ActionResult ThanhToanTC(bool check)
+        {
+            if(check)
+            {
+                Session["GioHang"] = new List<GioHangViewModel>();
+                ViewBag.Message = "Thanh Toan Thanh Cong";
+            }
+            else
+            {
+                ViewBag.Message = "Thanh Toan Khong Thanh Cong";
+            }
             return View();
         }
-
-
     }
 }

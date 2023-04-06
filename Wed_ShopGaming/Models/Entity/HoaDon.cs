@@ -20,6 +20,9 @@ namespace Wed_ShopGaming.Models.Entity
 
         public string Price { get; set; }
 
+        public DateTime DateTime { get; set; }
+        public string OrderStatus { get; set; }
+
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
         public  ICollection<CT_DH> CT_DHs { get; set; }

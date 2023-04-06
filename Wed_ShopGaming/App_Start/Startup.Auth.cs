@@ -64,11 +64,11 @@ namespace Wed_ShopGaming
                appId: "1367404713828629",
                appSecret: "4d4bc0cd884e16e625a2da49ac3b005c");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1072681453914-hj2ijvipn1oah7ng6bcrt89t4t8961kr.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
             CreateRolesUser();
         }
         public void CreateRolesUser()

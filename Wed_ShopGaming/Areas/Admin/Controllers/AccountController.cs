@@ -10,7 +10,7 @@ using Wed_ShopGaming.ViewModels;
 
 namespace Wed_ShopGaming.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         public ApplicationDbContext _dbContext { get; set; }
