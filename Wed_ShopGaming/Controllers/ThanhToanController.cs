@@ -77,6 +77,7 @@ namespace Wed_ShopGaming.Controllers
                         dhList.Add(cT_DH);
                     }
                     hoaDon.Price = result.ToString();
+                    hoaDon.DateTime= DateTime.Now;
                     context.HoaDons.Add(hoaDon);
                     context.CT_DHs.AddRange(dhList);
                     var userid = User.Identity.GetUserId();
@@ -182,6 +183,7 @@ namespace Wed_ShopGaming.Controllers
                     dhList.Add(cT_DH);
                 }
                 hoaDon.Price = result.ToString();
+                hoaDon.DateTime = DateTime.Now;
                 context.HoaDons.Add(hoaDon);
                 context.CT_DHs.AddRange(dhList);
                 var userid = User.Identity.GetUserId();

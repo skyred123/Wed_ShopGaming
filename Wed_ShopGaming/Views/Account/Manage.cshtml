@@ -1,8 +1,55 @@
-﻿@model Wed_ShopGaming.Models.ApplicationUser
-
+﻿@model Wed_ShopGaming.ViewModels.ListUserViewModel
+@using Wed_ShopGaming.ViewModels
 @{
     ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_LayoutDangNhap.cshtml";
 }
 
-<h2>Manage</h2>
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+<div class="login-area">
+    <div class="container">
+        <div class="login-box ptb--100">
+            @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="login-form-head">
+                    <h4>Thông Tin Tài Khoản</h4>
+                </div>
+                <div class="login-form-body">
+                    @Html.Label("Email", new { @for = "" })
+                    <div class="form-gp">
 
+                        @Html.DisplayFor(m => m.User.Email)
+                        <i class="ti-email"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    @Html.Label("Phone", new { @for = "" })
+                    <div class="form-gp">
+
+                        @Html.EditorFor(m => m.User.PhoneNumber)
+                        <i class="ti-mobile"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    @Html.Label("Address", new { @for = "" })
+                    <div class="form-gp">
+
+                        @Html.EditorFor(m => m.User.Adress)
+                        <i class="ti-comment"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    @Html.Label("Roles", new { @for = "" })
+                    <div class="form-gp">
+
+                        @Html.DisplayFor( m=>m.NameRole)
+                        <i class="ti-comment"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    <div class="submit-btn-area">
+                        <button id="form_submit" type="submit">Cập Nhật <i class="ti-arrow-right"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

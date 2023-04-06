@@ -16,7 +16,7 @@
                     <h4>Đăng Ký</h4>
                 </div>
                 <div class="login-form-body">
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @Html.ValidationSummary("", new { @class = "" })
                     <div class="form-gp">
                         @Html.LabelFor(m => m.Email, new { @for = "exampleInputEmail1" })
                         @Html.TextBoxFor(m => m.Email, new { id = "exampleInputEmail1" })
@@ -54,7 +54,7 @@
                     </div>
                     <div class="submit-btn-area">
                         <button id="form_submit" type="submit">Register <i class="ti-arrow-right"></i></button>
-                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        @Html.Partial("_LoginsPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                     </div>
                     <div class="form-gp">
                         <div class="form-footer text-center mt-5">
