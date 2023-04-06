@@ -25,20 +25,20 @@
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <a href="@Url.Action("DeleteCountShoppingCart","Shop",new {idSP = item.sanPham.Id,strURL = Request.Url.ToString()})" class="btn btn-sm btn-primary btn-minus">
+                                        <a href="@Url.Action("DeleteCountGioHang","Home",new {id = item.sanPham.Id,strURL = Request.Url.ToString()})" class="btn btn-sm btn-primary btn-minus">
                                             <i class="fa fa-minus"></i>
                                         </a>
                                     </div>
                                     <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@item.count">
                                     <div class="input-group-btn">
-                                        <a href="@Url.Action("AddShoppingCart","Shop",new {idSP = item.sanPham.Id,strURL = Request.Url.ToString()})" class="btn btn-sm btn-primary btn-plus" h>
+                                        <a href="@Url.Action("AddGioHang","Home",new {id = item.sanPham.Id,strURL = Request.Url.ToString()})" class="btn btn-sm btn-primary btn-plus" h>
                                             <i class="fa fa-plus"></i>
                                         </a>
                                     </div>
                                 </div>
                             </td>
                             <td class="align-middle"><p>@String.Format("{0:0,0}", item.sanPham.Price * item.count)đ</p></td>
-                            <td class="align-middle"><a href="@Url.Action("DeleteShoppingCart","Shop",new {idSP = item.sanPham.Id,strURL = Request.Url.ToString()})" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
+                            <td class="align-middle"><a href="@Url.Action("DeleteGioHang","Home",new {id = item.sanPham.Id,strURL = Request.Url.ToString()})" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
                         </tr>
                     }
                 </tbody>

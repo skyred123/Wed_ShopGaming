@@ -5,10 +5,10 @@
     <div class="row px-xl-5">
         @foreach (var item in Model)
         {
-            <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+            <div class="col-lg-3 col-md-5 col-sm-5 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="~/Contents_Custom/SaveImage/@item.img" alt="">
+                        <img class="img-fluid w-100" src="~/Contents_Custom/SaveImage/@item.img" width="1" height="1" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -36,7 +36,7 @@
         <div class="">
             Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
-            @Html.PagedListPager(Model, page => Url.Action("PageList", "Home", new { page, check = 1 }))
+            @Html.PagedListPager(Model, page => Url.Action("PageList", "Home", new { page, ViewBag.check }))
         </div>
     </div>
 </div>

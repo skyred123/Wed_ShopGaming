@@ -42,7 +42,15 @@ namespace Wed_ShopGaming.Controllers
                 {
                     HinhAnhMainViewModel temp = new HinhAnhMainViewModel();
                     temp.sanPham = item.sanPham;
-                    temp.img = item.sanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    if (item.sanPham.HinhAnhs.Count() != 0)
+                    {
+                        temp.img = item.sanPham.HinhAnhs.FirstOrDefault(e => e.STT == 0).Img;
+                    }
+                    else
+                    {
+                        temp.img = "";
+                    }
+                   
                     temp.count = item.count;
                     model.Add(temp);
                 }
@@ -105,7 +113,7 @@ namespace Wed_ShopGaming.Controllers
             string partnerCode = "MOMOOJOI20210710";
             string accessKey = "iPXneGmrJH0G8FOP";
             string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
-            string orderInfo = "Thanh Toan Mua Hang wed Shop Gaming: " + model.Sum(e => e.count * e.sanPham.Price);
+            string orderInfo = "Thanh Toan Mua Hang wed Shop Gaming: " + String.Format("{0:0,0}", model.Sum(e => e.count * e.sanPham.Price)) +"đ";
             string returnUrl = "https://localhost:44370/ThanhToan/ConfirmPaymentClient";
             string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/ThanhToan/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
