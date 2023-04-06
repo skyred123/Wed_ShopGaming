@@ -129,7 +129,8 @@
                                     @if (Request.IsAuthenticated)
                                     {
                                         @Html.AntiForgeryToken()
-                                        @Html.ActionLink( User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "d-flex text-light text-center" })
+                                        @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "d-flex text-light text-center" })
+                                        @Html.ActionLink("Order", "Order", "Account", routeValues: null, htmlAttributes: new { title = "Manage", @class = "d-flex text-light text-center" })
                                         <a href="~/Account/Logout">LogOut</a>
                                     }
                                     else
