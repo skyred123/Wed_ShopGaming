@@ -190,6 +190,10 @@
     <Compile Include="Migrations\202304051913421_update.designer.cs">
       <DependentUpon>202304051913421_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304060522572_add datetime.cs" />
+    <Compile Include="Migrations\202304060522572_add datetime.designer.cs">
+      <DependentUpon>202304060522572_add datetime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\CT_DH.cs" />
     <Compile Include="Models\Entity\HoaDon.cs" />
     <Compile Include="Others\MoMoSecurity.cs" />
@@ -683,6 +687,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutDangNhap.cshtml" />
+    <Content Include="Views\Account\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -700,6 +705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202304051913421_update.resx">
       <DependentUpon>202304051913421_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304060522572_add datetime.resx">
+      <DependentUpon>202304060522572_add datetime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

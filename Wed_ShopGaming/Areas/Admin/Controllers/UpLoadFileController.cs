@@ -10,6 +10,7 @@ using Wed_ShopGaming.ViewModels;
 
 namespace Wed_ShopGaming.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UpLoadFileController : Controller
     {
         ApplicationDbContext context;
