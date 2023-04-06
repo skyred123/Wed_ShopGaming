@@ -19,38 +19,38 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
         }
         // GET: QLSanPham
         #region Quan ly loai san pham
-        public ActionResult LoaiSP()
+        public ActionResult LoaiLK()
         {
-            List<LoaiSP> list = context.LoaiSPs.ToList();
-            LoaiSPViewModel model = new LoaiSPViewModel()
+            List<LoaiLK> list = context.LoaiLKs.ToList();
+            LoaiLKViewModel model = new LoaiLKViewModel()
             {
                 Loais = list,
             };
             return View(model);
         }
         [HttpPost]
-        public ActionResult Create_LoaiSP(LoaiSPViewModel entity)
+        public ActionResult Create_LoaiLK(LoaiLKViewModel entity)
         {
             if (entity.Name != null)
             {
-                LoaiSP loaiSP = new LoaiSP();
+                LoaiLK loaiSP = new LoaiLK();
                 loaiSP.Id = Guid.NewGuid().ToString();
                 loaiSP.Name = entity.Name;
-                context.LoaiSPs.Add(loaiSP);
+                context.LoaiLKs.Add(loaiSP);
                 context.SaveChanges();
             }
-            return RedirectToAction("LoaiSP", "QLSanPham",new { area = "Admin" });
+            return RedirectToAction("LoaiLK", "QLSanPham",new { area = "Admin" });
         }
-        public ActionResult Delete_LoaiSP(String id)
+        public ActionResult Delete_LoaiLK(String id)
         {
             if (id != null)
             {
-                LoaiSP loaiSP = (context.LoaiSPs.ToList()).FirstOrDefault(e => e.Id == id);
+                LoaiLK loaiSP = (context.LoaiLKs.ToList()).FirstOrDefault(e => e.Id == id);
                 if (loaiSP != null)
                 {
-                    context.LoaiSPs.Remove(loaiSP);
+                    context.LoaiLKs.Remove(loaiSP);
                     context.SaveChanges();
-                    return RedirectToAction("LoaiSP", "QLSanPham", new { area = "Admin" });
+                    return RedirectToAction("LoaiLK", "QLSanPham", new { area = "Admin" });
                 }
             }
             return RedirectToAction("Index", "Home");
@@ -58,47 +58,81 @@ namespace Wed_ShopGaming.Areas.Admin.Controllers
 
         #endregion
 
-        #region Quan ly thong so san pham
-        public ActionResult ThongSoSP(string id)
+        #region Quan ly loai san pham
+        public ActionResult LoaiMT()
         {
-            List<ThongSo> thongso = null;
-            if (id == null)
+            List<LoaiMT> list = context.LoaiMTs.ToList();
+            LoaiMTViewModel model = new LoaiMTViewModel()
             {
-                thongso = context.ThongSos.ToList();
-            }
-            else
-            {
-                thongso = context.LoaiSPs.ToList().FirstOrDefault(e=>e.Id == id).ThongSos.ToList();
-            }
-            ThongSoSPViewModel model = new ThongSoSPViewModel();
-            model.listThongSos = thongso;
-            model.listloaiSPs = context.LoaiSPs.ToList();
+                Loais = list,
+            };
             return View(model);
         }
         [HttpPost]
-        public ActionResult Create_ThongSoSP(ThongSoSPViewModel model)
+        public ActionResult Create_LoaiMT(LoaiMTViewModel entity)
         {
-            if (model != null)
+            if (entity.Name != null)
             {
-                ThongSo thongSo = new ThongSo();
-                thongSo.Id = Guid.NewGuid().ToString();
-                thongSo.Name = model.Name;
-                thongSo.IdLoaiSP = model.IdLoai;
-                context.ThongSos.Add(thongSo);
+                LoaiMT loaiSP = new LoaiMT();
+                loaiSP.Id = Guid.NewGuid().ToString();
+                loaiSP.Name = entity.Name;
+                context.LoaiMTs.Add(loaiSP);
                 context.SaveChanges();
             }
-            return RedirectToAction("ThongSoSP", "QLSanPham", new { area = "Admin" });
+            return RedirectToAction("LoaiMT", "QLSanPham", new { area = "Admin" });
         }
-        public ActionResult Delete_ThongSoSP(String id)
+        public ActionResult Delete_LoaiMT(String id)
         {
             if (id != null)
             {
-                ThongSo thongSo = (context.ThongSos.ToList()).FirstOrDefault(e => e.Id == id);
+                LoaiMT loaiSP = (context.LoaiMTs.ToList()).FirstOrDefault(e => e.Id == id);
+                if (loaiSP != null)
+                {
+                    context.LoaiMTs.Remove(loaiSP);
+                    context.SaveChanges();
+                    return RedirectToAction("LoaiMT", "QLSanPham", new { area = "Admin" });
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        #endregion
+
+        #region Quan ly thong so ky thuat san pham
+        public ActionResult TSKTSP(string id)
+        {
+            TSKTSPViewModel model = new TSKTSPViewModel();
+            model.listTSKT = context.TSKTs.ToList(); ;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Create_TSKTSP(TSKTSPViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model != null)
+                {
+                    TSKT thongSo = new TSKT();
+                    thongSo.Id = Guid.NewGuid().ToString();
+                    thongSo.Name = model.Name;
+                    thongSo.Description = model.Description;
+                    context.TSKTs.Add(thongSo);
+                    context.SaveChanges();
+                    return RedirectToAction("TSKTSP", "QLSanPham", new { area = "Admin" });
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Delete_TSKTSP(String id)
+        {
+            if (id != null)
+            {
+                TSKT thongSo = (context.TSKTs.ToList()).FirstOrDefault(e => e.Id == id);
                 if (thongSo != null)
                 {
-                    context.ThongSos.Remove(thongSo);
+                    context.TSKTs.Remove(thongSo);
                     context.SaveChanges();
-                    return RedirectToAction("ThongSoSP", "QLSanPham", new { area = "Admin" });
+                    return RedirectToAction("TSKTSP", "QLSanPham", new { area = "Admin" });
                 }
             }
             return RedirectToAction("Index", "Home");

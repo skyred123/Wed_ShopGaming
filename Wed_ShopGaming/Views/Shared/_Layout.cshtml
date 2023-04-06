@@ -7,20 +7,41 @@
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/Content/modernizr")*@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-
-    <!-- Google Web Fonts -->
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    @*Google Web Fonts*@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
+    <title>Wedsite ShopGaming</title>
+    @*Font Awesome*@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <!-- Libraries Stylesheet -->
+    @*Libraries Stylesheet*@
     <link href="~/Contents_Custom/lib/animate/animate.min.css" rel="stylesheet" />
     <script src="~/Contents_Custom/lib/owlcarousel/owl.carousel.min.js"></script>
-    <!-- Customized Bootstrap Stylesheet -->
+    @*Customized Bootstrap Stylesheet*@
     <link href="~/Contents_Custom/css/style.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Styse_Cutomer.css" rel="stylesheet" />*@
+    <link href="~/Contents_Custom/css/PagedList.css" rel="stylesheet" />
+
+
+    @{
+        Wed_ShopGaming.Models.ApplicationDbContext context = Wed_ShopGaming.Models.ApplicationDbContext.Create();
+        var ListMT = context.LoaiMTs.ToList();
+        var ListLK = context.LoaiLKs.ToList();
+        int count;
+        if (Session["GioHang"] == null)
+        {
+            count = 0;
+        }
+        else
+        {
+            count = (Session["GioHang"] as List<Wed_ShopGaming.ViewModels.GioHangViewModel>).Count();
+        }
+    }
+
+
 </head>
 <body class="">
     <header>
@@ -63,9 +84,27 @@
         </div>
         <!-- Topbar End -->
         <!-- Navbar Start -->
-        <div class="container-fluid bg-dark">
-            <div class="row">
-                <div class="">
+        <div class="container-fluid bg-dark mb-30">
+            <div class="row px-xl-5">
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                        <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                        <i class="fa fa-angle-down text-dark"></i>
+                    </a>
+                    <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                        <div class="navbar-nav w-100">
+                            @foreach (var item in ListMT)
+                            {
+                                <a class="nav-item nav-link">@item.Name</a>
+                            }
+                            @foreach (var item in ListLK)
+                            {
+                                <a class="nav-item nav-link">@item.Name</a>
+                            }
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
                             <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
@@ -79,241 +118,134 @@
                                 <a href="~/Shop/Shop" class="nav-item nav-link">Shop</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                <a href="" class="btn px-0">
-                                    <i class="fas fa-heart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                </a>
-                                <a href="~/Shop/ShoppingCart" class="btn px-0 ml-3">
+                                <a href="~/Home/ListGioHang" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">@count</span>
                                 </a>
                             </div>
                             <div class="btn-group ml-3">
-                                @if (Request.IsAuthenticated)
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                                        @Html.ActionLink("Log Out", "Logout", "Account")
-                                    </div>
-                                }
-                                else
-                                {
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "d-flex " })
-                                        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-                                    </div>
-                                }
+                                <button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                                <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ActionLink( User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "d-flex text-light text-center" })
+                                        <a href="~/Account/Logout">LogOut</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "d-flex text-light text-center" })
+                                        @Html.ActionLink("Log in", "Login", "Account", routeValues: Request.Url.ToString(), htmlAttributes: new { id = "loginLink", @class = " text-light text-center" })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="container-fluid mb-3">
+        <!-- Navbar End -->
+    </header>
+    <div class="p-5">
+        @RenderBody()
+        <hr />
+    </div>
+    <div class="container-fluid bg-dark text-secondary pt-5">
+        <div class="container-fluid">
             <div class="row px-xl-5">
-                <div class="col-lg-8">
-                    <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#header-carousel" data-slide-to="1"></li>
-                            <li data-target="#header-carousel" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item position-relative active" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="~/Contents_Custom/img/phukienmuakem_800x450.jpg" style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Ưa Đãi Sốc</h1>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="~/Contents_Custom/img/thumb_salelaptop_800x450.png" style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Ưa Đãi Cho Sinh Viên</h1>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="~/Contents_Custom/img/0909-pcgm-tin-tuc.jpg" style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Sale</h1>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="~/Contents_Custom/img/2711_1200x675.jpg" alt="">
-                        <div class="offer-text">
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                    <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="~/Contents_Custom/img/laptop_1280x720-800-resize.png" alt="">
-                        <div class="offer-text">
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid pt-5">
-            <div class="row px-xl-5 pb-3">
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Sản Phẩm Chất Lượng</h5>
+                        <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Chính Sách Vận Chuyển</h5>
+                        <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Đổi Trả Trong 30 Ngày</h5>
+                        <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Hỗ Trợ 24/24</h5>
+                        <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Navbar End -->
-        <div class="container-fluid pt-5 pb-3">
-            <div class="row px-xl-5">
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="~/Contents_Custom/img/black-friday-4510235_1280_1280x731-800-resize.jpg" alt="">
-                        <div class="offer-text">
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="~/Contents_Custom/img/giangsinh_1280x720-800-resize.jpg" alt="">
-                        <div class="offer-text">
-                            <a href="" class="btn btn-primary">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
+        <div class="row px-xl-5 ">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>TP HCM,Viet Nam</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@gmail.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
             </div>
-        </div>
-        <div class="container-fluid py-5">
-            <div class="row px-xl-5">
-                <div class="col">
-                    <div class="owl-carousel vendor-carousel">
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/asus.png " alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/acer.png" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/dell.png" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/gigabyte.png" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/hp.png" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/lenovo.png" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/lg.png" alt="">
-                        </div>
-                        <div class="bg-light p-4">
-                            <img src="~/Contents_Custom/img/LOGO/logitech.png" alt="">
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-            <div class="row px-xl-5 pt-5">
-                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Thông Tin Liên Lạc</h5>
-                    <p class="mb-4">Đồ Án Môn Lập Trình Web</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Đại Học Công Nghệ TP HCM Hutech</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-                </div>
-                <div class="col-lg-8 col-md-12">
-                    <div class="row">
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Trang Chủ</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Cửa Hàng</a>
-                            </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Trang Chủ</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Cửa Hàng</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                            <p>Đồ Án Môn Lập Trình Web</p>
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Your Email Address">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">Sign Up</button>
-                                    </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
+                        <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Your Email Address">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary">Sign Up</button>
                                 </div>
-                            </form>
-                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                            <div class="d-flex">
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
                             </div>
+                        </form>
+                        <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+                        <div class="d-flex">
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-    </header>
-
-    <div class="">
-        @RenderBody()
-        <hr />
+        </div>
     </div>
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="~/Contents_Custom/lib/easing/easing.min.js"></script>
-    @* <script src="lib/owlcarousel/owl.carousel.min.js"></script>*@
-
-    <!-- Contact Javascript File -->
+    <script src="~/Contents_Custom/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="~/Contents_Custom/mail/jqBootstrapValidation.min.js"></script>
     <script src="~/Contents_Custom/mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    @*<script src="~/Contents_Custom/js/main.js"></script>*@
+    <script src="~/Contents_Custom/js/main.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+
+
+

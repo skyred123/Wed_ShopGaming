@@ -42,27 +42,27 @@
     box-sizing: border-box;
 }
 
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
+/*html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}*/
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
 }
 
-body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #6C757D;
-    text-align: left;
-    background-color: #F5F5F5;
-}
+/*body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #6C757D;
+  text-align: left;
+  background-color: #F5F5F5;
+}*/
 
 [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important;
@@ -6340,9 +6340,9 @@ a.close.disabled {
     vertical-align: text-top !important;
 }
 
-.bg-primary {
-    background-color: #e6b400 !important;
-}
+/*.bg-primary {
+  background-color: #FFD333 !important;
+}*/
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -10061,9 +10061,9 @@ a.technology-winner {
     color: #fff !important;
 }
 
-.text-primary {
-    color: #e6e6e6 !important;
-}
+/*.text-primary {
+  color: #FFD333 !important;
+}*/
 
 a.text-primary:hover, a.text-primary:focus {
     color: #e6b400 !important;
@@ -10520,11 +10520,10 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 @keyframes action {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-15px);
-    }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-15px);
+  }
 }

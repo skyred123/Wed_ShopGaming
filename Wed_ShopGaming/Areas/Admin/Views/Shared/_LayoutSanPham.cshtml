@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-header ">
+    <ul class="nav nav-tabs card-header-tabs justify-content-center">
+        <li class="">
+            <button class="btn">San Pham</button>
+        </li>
+        <li class="">
+            <button class="btn ">Linh Kien</button>
+        </li>
+    </ul>
+</div>
+<div>
+    @RenderBody()
+</div>
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+}
+

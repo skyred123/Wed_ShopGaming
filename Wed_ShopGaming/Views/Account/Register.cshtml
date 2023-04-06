@@ -1,40 +1,71 @@
 ﻿@model Wed_ShopGaming.ViewModels.RegisterViewModel
+@using Wed_ShopGaming.ViewModels
 @{
+    Layout = "~/Views/Shared/_LayoutDangNhap.cshtml";
     ViewBag.Title = "Register";
 }
-
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+<div class="login-area">
+    <div class="container">
+        <div class="login-box ptb--100">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="login-form-head">
+                    <h4>Đăng Ký</h4>
+                </div>
+                <div class="login-form-body">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-gp">
+                        @Html.LabelFor(m => m.Email, new { @for = "exampleInputEmail1" })
+                        @Html.TextBoxFor(m => m.Email, new { id = "exampleInputEmail1" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { })
+                        <i class="ti-email"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    <div class="form-gp">
+                        @Html.LabelFor(m => m.Phone, new { @for = "exampleInputPhone1" })
+                        @Html.TextBoxFor(m => m.Phone, new { id = "exampleInputPhone1" })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { })
+                        <i class="ti-mobile"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    <div class="form-gp">
+                        @Html.LabelFor(m => m.Address, new { @for = "exampleInputAddress1" })
+                        @Html.TextBoxFor(m => m.Address, new { id = "exampleInputAddress1" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { })
+                        <i class="ti-comment"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    <div class="form-gp">
+                        @Html.LabelFor(m => m.Password, new { @for = "exampleInputPassword1" })
+                        @Html.PasswordFor(m => m.Password, new { id = "exampleInputPassword1" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { })
+                        <i class="ti-lock"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    <div class="form-gp">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @for = "exampleInputPassword2" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { id = "exampleInputPassword2" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { })
+                        <i class="ti-lock"></i>
+                        <div class="text-danger"></div>
+                    </div>
+                    <div class="submit-btn-area">
+                        <button id="form_submit" type="submit">Register <i class="ti-arrow-right"></i></button>
+                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    </div>
+                    <div class="form-gp">
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">Don't have an account?  @Html.ActionLink("Login as a new user", "Login")</p>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -9,14 +9,14 @@ namespace Wed_ShopGaming.Models.Entity
 {
     public class CT_LinhKien
     {
-        [StringLength(128)]
+        [Key]
+        public string id { get; set; }
         public string IdLinhKien { get; set; }
-        [StringLength(128)]
         public string IdMayTinh { get; set; }
 
-        [ForeignKey(nameof(IdLinhKien))]
-        public LinhKien LinhKien { get; set; }
-        [ForeignKey(nameof(IdMayTinh))]
+        [ForeignKey("IdMayTinh")]
         public MayTinh MayTinh { get; set; }
+        [ForeignKey("IdMayTinh")]
+        public LinhKien LinhKien { get; set;}
     }
 }

@@ -1,0 +1,107 @@
+﻿@model Wed_ShopGaming.ViewModels.ListHinhAnhViewModel
+@{
+    ViewBag.Title = "Image_LinhKien";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Wed_ShopGaming.Models.Entity.SanPham SP = (Wed_ShopGaming.Models.Entity.SanPham)ViewBag.Image;
+}
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("Ten")
+            </th>
+            <th>
+                @Html.Label("So luong")
+            </th>
+            <th>
+                @Html.Label("Gia")
+            </th>
+            <th>
+                @Html.Label("hang")
+            </th>
+            <th>
+                @Html.Label("Loai")
+            </th>
+            <th>
+                @Html.Label("HinhAnhs")
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label(SP.Name)
+            </td>
+            <td>
+                @Html.Label(SP.Amount.ToString())
+            </td>
+            <td>
+                @Html.Label(SP.Price.ToString())
+            </td>
+            <td>
+                @Html.Label(SP.Hang.Name)
+            </td>
+            <td>
+                @Html.Label(SP.LinhKien.LoaiLK.Name)
+            </td>
+            @*<td>
+                <div class="d-flex row">
+                    @using (Html.BeginForm("Delete_File", "UploadFile", FormMethod.Post))
+                    {
+                        <input class="btn btn-primary" type="submit" value="Delete" />
+                        <input type="hidden" name="idSanPham" value="@SP.Id" />
+                        <div class="d-flex row">
+                            @for (int i = 0; i < Model.HinhAnhs.Count; i++)
+                            {
+                                <div class="p-3 col-lg-2">
+                                    @Html.CheckBoxFor(m => m.HinhAnhs[i].IsCheck, htmlAttributes: new { @class = "", @name = "check" })
+                                    <img for="check" width="250" height="250" src="@Url.Action("RenderImage", "UpLoadFile", new { file = Model.HinhAnhs[i].Id })" />
+                                    @Html.HiddenFor(m => m.HinhAnhs[i].Id)
+                                    @Html.HiddenFor(m => m.HinhAnhs[i].IDSanPham)
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </td>*@
+        </tr>
+    </table>
+</div>
+<div class="">
+    <h3>Them Hinh Anh</h3>
+    @using (Html.BeginForm("UploadFile", "UploadFile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row d-flex">
+            <div class="form-group col-lg-10">
+                <input type="file" class="form-control" name="file" multiple="multiple" />
+            </div>
+            <div class="col-lg-2">
+                <button type="submit" class="btn btn-primary " id="check" value="">Tai File</button>
+            </div>
+            <input type="hidden" name="idSanPham" value="@SP.Id" />
+        </div>
+    }
+
+</div>
+<div class="p-3">
+
+</div>
+<div class="d-flex row">
+    @using (Html.BeginForm("Delete_File", "UploadFile", FormMethod.Post))
+    {
+        <input class="btn btn-primary" type="submit" value="Delete" />
+        <input type="hidden" name="idSanPham" value="@SP.Id" />
+        <div class="d-flex row">
+            @for (int i = 0; i < Model.HinhAnhs.Count; i++)
+            {
+                <div class="p-3 col-lg-2">
+                    @Html.CheckBoxFor(m => m.HinhAnhs[i].IsCheck, htmlAttributes: new { @class = "", @name = "check" })
+                    <img for="check" width="250" height="250" src="~/Contents_Custom/SaveImage/@Model.HinhAnhs[i].Img" />
+                    @Html.HiddenFor(m => m.HinhAnhs[i].Id)
+                    @Html.HiddenFor(m => m.HinhAnhs[i].IDSanPham)
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+

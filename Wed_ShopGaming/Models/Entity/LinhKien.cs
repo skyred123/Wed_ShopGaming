@@ -13,13 +13,16 @@ namespace Wed_ShopGaming.Models.Entity
         [StringLength(128)]
         public string Id { get; set; }
         [StringLength(128)]
-        public string IdThongSo { get; set; }
+        public string IdLoaiLK { get; set; }
 
         [ForeignKey(nameof(Id))]
         public SanPham SanPham { get; set; }
         
 
-        [ForeignKey(nameof(IdThongSo))]
-        public ThongSo ThongSo { get; set; }
+        [ForeignKey(nameof(IdLoaiLK))]
+        public LoaiLK LoaiLK { get; set; }
+        public virtual ICollection<CT_LinhKien> CT_LinhKiens { get; set; }
+
+        public virtual ICollection<CT_TSKT> CT_TSKTs { get; set; }
     }
 }
