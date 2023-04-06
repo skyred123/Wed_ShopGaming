@@ -169,9 +169,7 @@ namespace Wed_ShopGaming.Controllers
             authenManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-        [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
@@ -243,8 +241,13 @@ namespace Wed_ShopGaming.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
-
+        
+        public ActionResult Manage()
+        {
+            var userid= User.Identity.GetUserId();
+            var model = UserManager.FindById(userid);
+            return View(model);
+        }
 
 
 
